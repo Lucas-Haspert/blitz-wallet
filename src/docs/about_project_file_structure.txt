@@ -1,0 +1,54 @@
+Assets
+In this directory, we are going to store all assets files.
+Here we want to save fonts, icons, images, styles etc.
+
+Common
+This folder is using to save common files.
+Usually, it could be separated into 
+    - multiple inner folders: components mixins directives etc
+    - single files: functions.ts helpers.ts constants.ts config.ts and other. 
+The main reason to put a file into this folder is using it in many places.
+For example: inside src/common/components you can store Button.vue — the shared component, used throughout the whole application.
+In helpers.ts you can write a common function to use it in multiple places.
+
+Layouts
+I already covered the layout problem in one of my previous articles.
+You can save your app layouts in this directory.
+For example: AppLayout.vue.
+
+Middlewares
+This directory closely works with vue router.
+You can store your navigation guards inside this folder.
+
+Modules
+This is the core of our application. Here we store all our modules — logically separated parts of our application.
+I encourage you inside each module create:
+    - an inner components' folder where you can save your vue components
+    - tests folder (I prefer to keep all related tests in the module)
+    - store.ts or store directory, where you keep your store module
+
+Plugins
+In this folder you can create and connect all your plugins.
+
+Services
+This folder is needed to store your services.
+For example, you can create and save an API connections service, localStorage manager service, etc.
+
+Static
+Usually, you do not need this folder.
+It could be used to save some dummy data.
+
+Router
+Inside this directory you can store all files related to vue-router.
+It could be just index.ts with router and routes in one place (in this case it probably a good idea to store this file in src root).
+I prefer to separate router and routes into two different files to avoid mess.
+
+Store
+This is vuex store directory where you can save all vuex related files.
+Since you want to separate your vuex modules, in this folder you should store root state, actions, mutations and getters and automatically connect all vuex modules from the modules directory.
+
+Views
+This is the second most important folder in our application.
+Here we store all entry points for applications’ routes.
+For example, in your application you can have /home /about /orders routes.
+Respectively, in the views folder you should have Home.vue About.vue Orders.vue.
