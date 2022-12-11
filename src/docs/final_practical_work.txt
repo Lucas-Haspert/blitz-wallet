@@ -37,6 +37,7 @@ Las requests para obtener el precio de las criptomonedas en los diferentes excha
 
 
 Con respecto a las criptomonedas, debido a que existen muchas, la aplicación debe manejar al menos 3 (por ejemplo, Bitcoin, USDC y Ethereum), aunque pueden ser más (lo cual es mejor). La elección de estas 3 está a cargo del estudiante.
+
 Pantalla login
 La primera pantalla debe ser la de login. En esta se debe ingresar un ID alfanumérico, y que será usado ya que, como las requests van a ser a una API que lo compartirán todos los alumnos, tenemos que distinguir de alguna forma quién está llamando (entonces los datos del Alumno A no se mezclan con lo del Alumno B).
 
@@ -75,6 +76,7 @@ Como se puede ver:
 
 
 De esta forma, ya queda guardada en la base de datos para futuras consultas.
+
 Pantalla dar de alta una nueva venta
 Asimismo como hay una pantalla para indicar una compra, debe haber una para que el usuario indique que vendió una cantidad X de criptomonedas. Para eso, la pantalla debe permitir ingresar:
 * La criptomoneda que se vendió.
@@ -292,6 +294,7 @@ Criptomoneda
 	
 
 Tener en cuenta de que obviamente puede haber tanto pérdidas como ganancias.
+
 Mejoras a la aplicación
 Aunque compleja, esta aplicación está lejos de poder usarse en un ambiente profesional. Por ende, se le pueden hacer mejoras que no son obligatorias, pero sumarán puntaje extra a la nota final (es decir, no son necesarias hacerlas sino opcionales, pero si sentís que querés aprender más, ¡es ideal que se hagan!).
 Dificultad Media: Uso de tests
