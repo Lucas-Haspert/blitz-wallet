@@ -1,0 +1,5 @@
+Primary color---------------------------------->#42B983
+Complementary primary color-------------------->#B94278
+
+Secondary color-------------------------------->#
+Complementary secondary color------------------>#

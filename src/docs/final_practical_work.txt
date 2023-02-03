@@ -47,6 +47,7 @@ Para guardar este dato, que va a ser tomado en un componente pero usado en casi 
 * Pinia: es el sucesor de Vuex, el cual se usa de una forma idéntica.
 * Usar localstorage: una forma simple y sencilla de almacenar datos de forma local. Al igual que Vuex, existen varios tutoriales en español (por ejemplo éste, que aunque sea explicado dentro de la documentación de Vue 2, es válido para Vue 3).
 * Pasarlo a los otros componentes a través de propiedades y emisión de eventos.
+
 Pantalla dar de alta una nueva compra
 Una pantalla debe permitir dar de alta una nueva compra de criptomonedas. Para ello se debe ingresar:
 * La criptomoneda que se compró (recordar que deben ser al menos 3 las opciones).
