@@ -2,23 +2,30 @@
   <nav>
     <ul>
       <li><router-link to="/">Inicio</router-link></li>
-      <li style="float:right"><router-link to="/login" v-on:click.prevent = "logout">Cerrar sesión</router-link></li>
+      <li><router-link to="/record">Historial</router-link></li>
+      <li style="float:right"><router-link to="/login" v-on:click.prevent="logout">Cerrar sesión</router-link></li>
     </ul>
   </nav>
   <router-view />
 </template>
   
 <script>
-import { mapActions } from 'vuex'
-import store from '@/store/index';
-
 export default {
   name: 'NavBar',
   methods: {
-    ...mapActions(store, ["account"]),
     logout() {
-      // Log out the user.
-      this.$store.dispatch('account/logout');
+      // Remove 'username' from the localStorage.
+      if (localStorage.getItem('username') !== null) {
+        localStorage.removeItem('username');
+      }
+
+      // Remove 'isLogged' from the localStorage.
+      if (localStorage.getItem('isLogged') !== null) {
+        localStorage.removeItem('isLogged');
+      }
+
+      // Clear the localStorage.
+      localStorage.clear();
     },
   }
 }

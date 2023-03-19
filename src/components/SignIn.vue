@@ -14,8 +14,6 @@
 </template>
     
 <script>
-import { mapActions } from 'vuex'
-import store from '@/store/index';
 import router from '@/router/index';
 
 export default {
@@ -27,7 +25,6 @@ export default {
 
   },
   methods: {
-    ...mapActions(store, ["account"]),
     doLogin() {
       // Check if the username entered is empty.
       if (this.username === null || this.username.length === "") {
@@ -46,10 +43,9 @@ export default {
 
       // This expression only accepts alphanumeric values and limits the number of characters entered from 4 to 20 characters.
       if (/^[a-zA-Z0-9]{4,20}$/.test(this.username)) {
-        // Log in the user and then redirect to home.
-        this.$store.dispatch('account/login', {
-          username: this.username,
-        });
+        // Save the username and the login status in localStorage
+        localStorage.setItem('username', this.username);
+        localStorage.setItem('isLogged', true);
 
         router.push({ path: '/' })
 

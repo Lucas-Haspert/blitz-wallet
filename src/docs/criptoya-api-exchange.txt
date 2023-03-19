@@ -1,0 +1,228 @@
+EXCHANGE
+----------------------------------------------------------------------------------------------------------------
+ArgenBTC
+Endpoint: /api/argenbtc/{coin}/{fiat}
+
+coin: (BTC, DAI)
+fiat: (ARS)
+
+Ejemplo: https://criptoya.com/api/argenbtc/btc/ars
+----------------------------------------------------------------------------------------------------------------
+Belo
+Endpoint: /api/belo/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDT, USDC)
+fiat: (ARS)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/belo/eth/ars/0.5
+----------------------------------------------------------------------------------------------------------------
+Bitex
+Endpoint: /api/bitex/btc/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDC, USDT)
+fiat: (ARS, CLP, USD)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/bitex/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+Bitmonedero
+Endpoint: /api/bitmonedero/{coin}/{fiat}/{vol}
+
+coin: (BTC)
+fiat: (ARS)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/bitmonedero/btc/ars/0.02
+----------------------------------------------------------------------------------------------------------------
+Bitso
+Endpoint: /api/bitso/{coin}/{fiat}/{vol}
+
+coin: (BTC, DAI)
+fiat: (ARS, BRL, MXN, TUSD, DAI, USD)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/bitso/dai/ars/500
+----------------------------------------------------------------------------------------------------------------
+Buda
+Endpoint: /api/bitso/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, BCH, LTC)
+fiat: (ARS, CLP, COP, PEN)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/buda/eth/ars/3.5
+----------------------------------------------------------------------------------------------------------------
+Buenbit
+Endpoint: /api/buenbit/{coin}/{fiat}
+
+coin: (BTC, ETH, DAI, ADA, BNB, MATIC)
+fiat: (ARS, PEN, USD)
+
+Ejemplo: https://criptoya.com/api/buenbit/dai/ars
+----------------------------------------------------------------------------------------------------------------
+Calypso Exchange P2P
+Endpoint: /api/calypso/{coin}/{fiat}
+
+coin: (BTC, ETH, DAI, USDT, LTC, BCH)
+fiat: (ARS, USD)
+
+Ejemplo: https://criptoya.com/api/calypso/btc/ars
+----------------------------------------------------------------------------------------------------------------
+Copter
+Endpoint: /api/copter/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, XLM)
+fiat: (ARS, USDC)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/copter/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+CriptoFácil
+Endpoint: /api/criptofacil/{coin}/ars/{vol}
+
+coin: (BTC, ETH, USDT, BCH, LTC, ADA)
+
+Ejemplo: https://criptoya.com/api/criptofacil/usdt
+----------------------------------------------------------------------------------------------------------------
+CryptoMKT
+Endpoint: /api/cryptomkt/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, EOS)
+fiat: (ARS, BRL, CLP)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/cryptomkt/btc/ars/0.21
+----------------------------------------------------------------------------------------------------------------
+Decrypto
+Endpoint: /api/decrypto/{coin}/{fiat}/{vol}
+
+coin: (BTC, USDT, DAI)
+fiat: (ARS, PEN, USD)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/decrypto/btc/usd/1
+----------------------------------------------------------------------------------------------------------------
+Domitai
+Endpoint: /api/domitai/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, USDT, USDC, LTC, BCH)
+fiat: (MXN)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/domitai/btc/mxn/0.01
+----------------------------------------------------------------------------------------------------------------
+Fiwind
+Endpoint: /api/fiwind/btc/ars/{vol}
+
+fiat: (ARS, USD)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/fiwind/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+Kripton Market
+Endpoint: /api/kriptonmarket/{coin}/ars
+
+coin: (BTC, DOC, USDT)
+
+Ejemplo: https://criptoya.com/api/kriptonmarket/doc/ars/100
+----------------------------------------------------------------------------------------------------------------
+Latamex
+Endpoint: /api/latamex/{coin}
+
+coin: (BTC, ETH, DAI, USDT, LTC)
+fiat: (ARS, BRL, MXN)
+
+Ejemplo: https://criptoya.com/api/latamex/btc
+----------------------------------------------------------------------------------------------------------------
+LemonCash
+Endpoint: /api/lemoncash/{coin}
+
+coin: (BTC, ETH, USDT, UNI)
+
+Ejemplo: https://criptoya.com/api/lemoncash/btc
+----------------------------------------------------------------------------------------------------------------
+Let'sBit
+Endpoint: /api/letsbit/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDT, USDP, ADA, LINK, EOS, UNI)
+fiat: (ARS, USD, EUR)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/letsbit/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+Orionx
+Endpoint: /api/orionx/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDT, BNB, BCH, LTC, XLM, XRP)
+fiat: (CLP)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/orionx/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+Plus Crypto
+Endpoint: /api/pandaexchange/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDC, USDT, PAXG, UNI, BCH, XRP, LINK, LTC)
+fiat: (ARS)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/pluscrypto/btc/ars/0.1
+----------------------------------------------------------------------------------------------------------------
+Ripio
+Endpoint: /api/ripio/{coin}
+
+coin: (BTC, ETH, DAI, USDC, LTC, UNI, LINK)
+fiat: (ARS, BRL, MXN)
+
+Ejemplo: https://criptoya.com/api/ripio/usdc
+----------------------------------------------------------------------------------------------------------------
+Ripio Exchange
+Endpoint: /api/ripioexchange/{coin}/{fiat}/{vol}
+
+coin: (BTC, ETH, DAI, USDC, BCH)
+fiat: (ARS, BRL, USDC, DAI)
+vol: (float)
+
+Ejemplo: https://criptoya.com/api/ripioexchange/dai/ars/100
+----------------------------------------------------------------------------------------------------------------
+SatoshiTango
+Endpoint: /api/satoshitango/{coin}/{fiat}
+
+coin: (BTC, ETH, DAI, USDC, XRP, BCH, LTC, ADA, SOL, XLM)
+fiat: (ARS, CLP, MXN, PEN, USD)
+
+Ejemplo: https://criptoya.com/api/satoshitango/btc/ars
+----------------------------------------------------------------------------------------------------------------
+TiendaCrypto
+Endpoint: /api/tiendacrypto/{coin}/{fiat}
+
+coin: (ETH, DAI)
+fiat: (ARS)
+
+Ejemplo: https://criptoya.com/api/tiendacrypto/dai/ars
+----------------------------------------------------------------------------------------------------------------
+UniversalCoins
+Endpoint: /api/universalcoins/{coin}/{fiat}
+
+coin: (BTC, ETH, USDT, XRP, BCH, LTC, EOS)
+fiat: (ARS, USD)
+
+Ejemplo: https://criptoya.com/api/universalcoins/btc/ars
+----------------------------------------------------------------------------------------------------------------
+Vibrant
+Endpoint: /api/vibrant/{coin}/{fiat}
+
+coin: (USDC, XLM)
+fiat: (ARS)
+
+Ejemplo: https://criptoya.com/api/vibrant/usdc/ars
+----------------------------------------------------------------------------------------------------------------
+Vita Wallet
+Endpoint: /api/vitawwallet/{coin}/{fiat}
+
+coin: (BTC)
+fiat: (CLP)
+
+Ejemplo: https://criptoya.com/api/vitawallet/btc/clp
+----------------------------------------------------------------------------------------------------------------

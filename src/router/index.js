@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
+import RecordView from '../views/RecordView.vue'
 
 const routes = [
   {
@@ -18,6 +19,15 @@ const routes = [
       // Redirect to home if the user is already logged.
       if (localStorage.getItem('isLogged')) {
         return { name: 'home' }
+      }
+    }
+  },
+  {
+    path: '/record', name: 'record', component: RecordView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+        return { name: 'login' }
       }
     }
   },
