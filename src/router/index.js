@@ -4,8 +4,12 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RecordView from '../views/RecordView.vue'
 import ExchangesView from '../views/ExchangesView.vue'
+import AccountView from '../views/AccountView.vue'
+import SummaryView from '../views/SummaryView.vue'
+import TransactionView from '../views/TransactionView.vue'
 
 const routes = [
+  // Home
   {
     path: '/', name: 'home', component: HomeView,
     beforeEnter: () => {
@@ -15,6 +19,7 @@ const routes = [
       }
     }
   },
+  // Login
   {
     path: '/login', name: 'login', component: LoginView,
     beforeEnter: () => {
@@ -24,6 +29,7 @@ const routes = [
       }
     }
   },
+  // Record
   {
     path: '/record', name: 'record', component: RecordView,
     beforeEnter: () => {
@@ -33,8 +39,39 @@ const routes = [
       }
     }
   },
+  // Exchanges
   {
     path: '/exchanges', name: 'exchanges', component: ExchangesView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  // Account
+  {
+    path: '/account', name: 'account', component: AccountView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  // Summary
+  {
+    path: '/summary', name: 'summary', component: SummaryView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  // Transaction
+  {
+    path: '/transaction', name: 'transaction', component: TransactionView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
