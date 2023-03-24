@@ -1,12 +1,16 @@
 <template>
   <NavBar></NavBar>
-  <div class="rename">
+  <div>
     <div v-if="loadingStatus" class="LoadingSpinner">
       <LoadingSpinner></LoadingSpinner>
     </div>
-    <div v-else class="cartera-vacia">
+    <div v-else>
+      <!-- Title section -->
       <h1>Historial de transacciones</h1>
+      <!-- Title section -->
+      <!-- Table section -->
       <TableRecord v-bind:items="transactions"></TableRecord>
+      <!-- Table section -->
     </div>
   </div>
 </template>
@@ -24,14 +28,21 @@ export default {
     LoadingSpinner,
     TableRecord,
   },
+  created() {
+    // Get the transactions
+    this.$store.dispatch('transaction/getAll', localStorage.getItem('username'));
+  },
   computed: {
     ...mapState({
       loadingStatus: state => state.loading.loadingStatus,
       transactions: state => state.transaction.transactions,
     })
   },
-  created() {
-    this.$store.dispatch('transaction/getAll', localStorage.getItem('username'));
+  watch: {
+
+  },
+  methods: {
+
   }
 }
 </script>

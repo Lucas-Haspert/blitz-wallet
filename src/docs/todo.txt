@@ -1,0 +1,7 @@
+1- Crear página para consultar cantidad de monedas
+2- Crear pagina compra/venta
+3- Ordenar historial de compras/ventas de más reciente a más antiguo
+4- Crear página para consultar el precio del dolar en diferentes bancos
+5- Crear página para cargar saldo a la billetera virtual
+6- Poner logo de BlitzWallet en menú
+7- Unificar los estilos con una paleta de colores

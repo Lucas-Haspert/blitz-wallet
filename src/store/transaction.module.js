@@ -22,7 +22,10 @@ export default {
     mutations: {
         SET_TRANSACTIONS(state, transactions) {
             state.transactions = transactions;
-        }
+        },
+        RESET_TRANSACTIONS(state) {
+            state.transactions = [];
+        },
     },
     actions: {
         async getAll({ commit }, username) {
@@ -48,27 +51,9 @@ export default {
                 throw new Error(`API ${error}`);
             });
         },
+        resetState({ commit }) {
+            // Reset the transactions
+            commit('RESET_TRANSACTIONS');
+        },
     },
 }
-
-/*
-{COMPRA
-        "_id": "63a1c60bbfee487c00034e40",
-        "crypto_code": "btc",
-        "crypto_amount": 0.003,
-        "money": "16349.10",
-        "user_id": "Vigo09",
-        "action": "purchase" || "purchases",
-        "datetime": "2022-12-20T14:26:18.178Z"
-},
-
-{VENTA
-        "_id": "63c02188aa35d26a00005735",
-        "crypto_code": "eth",
-        "crypto_amount": "1",
-        "money": "433563.00",
-        "user_id": "agu123",
-        "action": "sale",
-        "datetime": "2023-01-12T12:04:39.000Z"
-},
-*/

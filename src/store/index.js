@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import loading from './loading.module'
 import transaction from './transaction.module'
+import exchange from './exchange.module'
 
 export default createStore({
   state: {
@@ -18,5 +19,6 @@ export default createStore({
   modules: {
     loading,
     transaction,
+    exchange,
   }
 })

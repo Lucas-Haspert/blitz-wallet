@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RecordView from '../views/RecordView.vue'
+import ExchangesView from '../views/ExchangesView.vue'
 
 const routes = [
   {
@@ -24,6 +26,15 @@ const routes = [
   },
   {
     path: '/record', name: 'record', component: RecordView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  {
+    path: '/exchanges', name: 'exchanges', component: ExchangesView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
