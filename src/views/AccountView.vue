@@ -34,13 +34,13 @@
             <div class="mx-auto col-10 col-md-8 col-lg-6">
                 <form>
                     <div class="form-floating">
-                        <input type="number" min="0" class="form-control" id="inputFunds" placeholder="Ingrese el monto a cargar">
+                        <input type="decimal" min="0" :maxlength="9" class="form-control" id="inputFunds" v-model="amount">
                         <label for="inputFunds">Monto a cargar</label>
-                        <small id="inputHelp" class="form-text text-muted">No puede cargar saldos negativos ni saldos
-                            mayores a $100.000.000</small>
+                        <small class="form-text text-muted">No puede cargar saldos negativos ni saldos mayores a $100.000.000</small>
+                        <br>
+                        <small class="form-text text-muted">Utilice un punto para cargar valores decimales.</small>
                     </div>
-                    <button id="btnLogin" class="btn btn-lg btn-primary w-100" type="submit" @click="loadFunds">Cargar
-                        fondos</button>
+                    <button id="btnLogin" class="btn btn-lg btn-primary w-100" type="submit" @click="loadFunds" :disabled='disableBtn'>Cargar fondos</button>
                 </form>
             </div>
         </div>
@@ -57,6 +57,10 @@ export default {
     components: {
         NavBar,
     },
+    data: () => ({
+        amount: null,
+        disableBtn: true,
+    }),
     created() {
 
     },
@@ -64,10 +68,27 @@ export default {
         ...mapState({
             username: state => state.account.username,
             funds: state => state.account.funds,
-        })
+            isDisabled: function () {
+                return this.disableBtn;
+            },
+        }),
     },
     watch: {
+        amount: {
+            // Button enabled and disabled.
+            handler: function () {
+                if (this.amount === null || this.amount === '') {
+                    return this.disableBtn = true;
+                }
 
+                if (this.amount > 0 && this.amount <= 100000000) {
+                    return this.disableBtn = false;
+                } else {
+                    return this.disableBtn = true;
+                }
+            },
+            deep: true
+        },
     },
     methods: {
         loadFunds() {

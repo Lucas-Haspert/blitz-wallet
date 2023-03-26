@@ -6,11 +6,13 @@
         <form>
           <h3>Por favor, inicie sesión</h3>
           <div class="form-floating">
-            <input type="username" class="form-control" id="floatingInput" placeholder="userexample" v-model="username">
-            <label for="floatingInput">Usuario</label>
-            <small id="inputHelp" class="form-text text-muted">El usuario debe tener entre 4 y 20 caracteres y no puede tener caracteres especiales.</small>
+            <input type="text" :maxlength="20" class="form-control" id="inputUsername" v-model="username">
+            <label for="inputUsername">Usuario</label>
+            <small id="inputHelp" class="form-text text-muted">El usuario debe tener entre 4 y 20 caracteres y no puede
+              tener caracteres especiales.</small>
           </div>
-          <button id="btnLogin" class="btn btn-lg btn-primary w-100" type="submit" @click="doLogin" v-if="username !== null && username !== '' && username.length >= 4 && username.length <= 20">Iniciar sesión</button>
+          <button id="btnLogin" class="btn btn-lg btn-primary w-100" type="submit" @click="doLogin"
+            :disabled='disableBtn'>Iniciar sesión</button>
         </form>
       </div>
     </div>
@@ -18,6 +20,7 @@
 </template>
   
 <script>
+import { mapState } from "vuex";
 import router from '@/router/index';
 
 export default {
@@ -27,9 +30,27 @@ export default {
   },
   data: () => ({
     username: null,
+    disableBtn: true,
   }),
   computed: {
-
+    ...mapState({
+      isDisabled: function () {
+        return this.disableBtn;
+      },
+    }),
+  },
+  watch: {
+    username: {
+      // Button enabled and disabled.
+      handler: function () {
+        if (this.username !== null && this.username.trim() !== '' && this.username.trim().length >= 4 && this.username.trim().length <= 20) {
+          return this.disableBtn = false;
+        } else {
+          return this.disableBtn = true;
+        }
+      },
+      deep: true
+    },
   },
   methods: {
     doLogin() {
@@ -52,7 +73,7 @@ export default {
       if (/^[a-zA-Z0-9]{4,20}$/.test(this.username)) {
         // Login.
         this.$store.dispatch('account/login', { 'username': this.username });
-        
+
         // Redirect to home.
         router.push({ path: '/' })
 
