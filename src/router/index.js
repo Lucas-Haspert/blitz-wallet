@@ -14,7 +14,7 @@ const routes = [
     path: '/', name: 'home', component: HomeView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }
@@ -24,7 +24,7 @@ const routes = [
     path: '/login', name: 'login', component: LoginView,
     beforeEnter: () => {
       // Redirect to home if the user is already logged.
-      if (localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged')) {
         return { name: 'home' }
       }
     }
@@ -34,7 +34,7 @@ const routes = [
     path: '/record', name: 'record', component: RecordView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }
@@ -44,7 +44,7 @@ const routes = [
     path: '/exchanges', name: 'exchanges', component: ExchangesView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }
@@ -54,7 +54,7 @@ const routes = [
     path: '/account', name: 'account', component: AccountView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }
@@ -64,7 +64,7 @@ const routes = [
     path: '/summary', name: 'summary', component: SummaryView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }
@@ -74,7 +74,7 @@ const routes = [
     path: '/transaction', name: 'transaction', component: TransactionView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
-      if (localStorage.getItem('isLogged') === null || !localStorage.getItem('isLogged')) {
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
         return { name: 'login' }
       }
     }

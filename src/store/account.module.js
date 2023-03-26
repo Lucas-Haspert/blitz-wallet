@@ -1,10 +1,10 @@
 export default {
     namespaced: true,
     state: {
-        username: null,
-        logged: null,
-        funds: null,
-        coins: null,
+        username: localStorage.getItem('username'),
+        logged: localStorage.getItem('logged'),
+        funds: localStorage.getItem('funds'),
+        coins: localStorage.getItem('coins'),
     },
     getters: {
         username: state => {
@@ -22,25 +22,30 @@ export default {
     },
     mutations: {
         LOGIN(state, username) {
-            state.username = username;
-            state.logged = true;
-            state.funds = 0;
-            state.coins = [];
-
             // Clear the localStorage.
             localStorage.clear();
 
-            // Save the login status in localStorage.
-            localStorage.setItem('isLogged', true);
+            // Save the account in localStorage.
+            localStorage.setItem('username', username);
+            localStorage.setItem('logged', true);
+            localStorage.setItem('funds', 0);
+            localStorage.setItem('coins', []);
+
+            // Update state.
+            state.username = localStorage.getItem('username');
+            state.logged = localStorage.getItem('logged');
+            state.funds = localStorage.getItem('funds');
+            state.coins = localStorage.getItem('coins');
         },
         LOGOUT(state) {
+            // Clear the localStorage.
+            localStorage.clear();
+
+            // Update state.
             state.username = null;
             state.logged = null;
             state.funds = null;
             state.coins = null;
-
-            // Clear the localStorage.
-            localStorage.clear();
         },
     },
     actions: {
