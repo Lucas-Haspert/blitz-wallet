@@ -29,8 +29,11 @@ export default {
     TableRecord,
   },
   created() {
-    // Get the transactions
-    this.$store.dispatch('transaction/getAll', localStorage.getItem('username'));
+    // Get the username.
+    let username = this.$store.getters['account/username'];
+    
+    // Get the transactions.
+    this.$store.dispatch('transaction/getAll', username);
   },
   computed: {
     ...mapState({

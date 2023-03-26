@@ -85,17 +85,17 @@ export default {
   },
   methods: {
     search() {
-      // Check the selectedFiat
+      // Check the selectedFiat.
       if (this.selectedFiat === null || this.selectedFiat === '') {
         return;
       }
 
-      // Check the selectedCoin
+      // Check the selectedCoin.
       if (this.selectedCoin === null || this.selectedCoin === '') {
         return;
       }
 
-      // Get the exchanges
+      // Get the exchanges.
       this.$store.dispatch('exchange/getAll', { 'fiat': this.selectedFiat, 'coin': this.selectedCoin, 'volumen': 1 });
     },
   }

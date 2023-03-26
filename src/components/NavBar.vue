@@ -19,18 +19,8 @@ export default {
   name: 'NavBar',
   methods: {
     logout() {
-      // Remove 'username' from the localStorage.
-      if (localStorage.getItem('username') !== null) {
-        localStorage.removeItem('username');
-      }
-
-      // Remove 'isLogged' from the localStorage.
-      if (localStorage.getItem('isLogged') !== null) {
-        localStorage.removeItem('isLogged');
-      }
-
-      // Clear the localStorage.
-      localStorage.clear();
+      // Logout.
+      this.$store.dispatch('account/logout');
     },
   }
 }

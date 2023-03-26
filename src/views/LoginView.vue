@@ -50,10 +50,10 @@ export default {
 
       // This expression only accepts alphanumeric values and limits the number of characters entered from 4 to 20 characters.
       if (/^[a-zA-Z0-9]{4,20}$/.test(this.username)) {
-        // Save the username and the login status in localStorage
-        localStorage.setItem('username', this.username);
-        localStorage.setItem('isLogged', true);
-
+        // Login.
+        this.$store.dispatch('account/login', { 'username': this.username });
+        
+        // Redirect to home.
         router.push({ path: '/' })
 
       } else {

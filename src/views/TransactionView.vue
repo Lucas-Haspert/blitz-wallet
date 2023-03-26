@@ -1,7 +1,8 @@
 <template>
     <NavBar></NavBar>
     <div>
-        <h1>Comprar/Vender</h1>
+        <h1>Comprar</h1>
+        <h1>Vender</h1>
     </div>
 </template>
   
