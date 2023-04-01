@@ -1,7 +1,7 @@
 1- Crear/Desarrollar página para consultar cantidad de monedas (SummaryView)
-1- Crear/Desarrollar pagina compra/venta (TransactionView)
+2- Crear/Desarrollar pagina compra/venta (TransactionView)
 3- Ordenar historial de compras/ventas de más reciente a más antiguo
-1- Crear/Desarrollar página para consultar el precio del dolar en diferentes bancos
-1- Crear/Desarrollar página para cargar saldo a la billetera virtual (AccountView)
+4- Crear/Desarrollar página para consultar el precio del dolar en diferentes bancos
 6- Poner logo de BlitzWallet en menú
 7- Unificar los estilos con una paleta de colores
+8- Pantalla análisis de inversiones (Esto es lo último que hay que hacer junto a la unificación de estilos.)

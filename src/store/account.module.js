@@ -47,6 +47,13 @@ export default {
             state.funds = null;
             state.coins = null;
         },
+        UPDATE_FUNDS(state, amount) {
+            // Update and save the funds in localStorage.
+            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) + parseFloat(amount));
+
+            // Update state.
+            state.funds = localStorage.getItem('funds');
+        },
     },
     actions: {
         login({ commit }, { username }) {
@@ -54,6 +61,9 @@ export default {
         },
         logout({ commit }) {
             commit('LOGOUT');
+        },
+        loadFunds({ commit }, { amount }) {
+            commit('UPDATE_FUNDS', amount);
         },
     },
 }
