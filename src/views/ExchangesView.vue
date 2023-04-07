@@ -9,12 +9,12 @@
       <h1>Exchanges</h1>
       <!-- Selects section -->
       <div>
-        <select class="col-2 mx-auto" v-model="selectedFiat">
+        <select class="form-select" v-model="selectedFiat">
           <option disabled value="">Seleccione una moneda</option>
           <option v-bind:value="'ars'">Peso argentino</option>
           <option v-bind:value="'usd'">Dólar estadounidense</option>
         </select>
-        <select class="col-2 mx-auto" v-model="selectedCoin">
+        <select class="form-select" v-model="selectedCoin">
           <option disabled value="">Seleccione una cripto</option>
           <option v-bind:value="'btc'">Bitcoin</option>
           <option v-bind:value="'eth'">Ethereum</option>
@@ -98,3 +98,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.form-select {
+  margin-top: 5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+}
+</style>
