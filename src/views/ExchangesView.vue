@@ -7,7 +7,6 @@
     <div v-else>
       <!-- Title section -->
       <h1>Exchanges</h1>
-      <!-- Title section -->
       <!-- Selects section -->
       <div>
         <select class="col-2 mx-auto" v-model="selectedFiat">
@@ -27,7 +26,6 @@
           <option v-bind:value="'doge'">Dogecoin</option>
         </select>
       </div>
-      <!-- Selects section -->
       <!-- Table section -->
       <div>
         <div v-if="selectedFiat === 'ars' && selectedCoin !== ''">
@@ -37,7 +35,6 @@
           <TableExchange v-bind:items="exchanges" fiat='usd'></TableExchange>
         </div>
       </div>
-      <!-- Table section -->
     </div>
   </div>
 </template>

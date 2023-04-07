@@ -3,7 +3,6 @@
     <div>
         <!-- Title section -->
         <h1>Cuenta</h1>
-        <!-- Title section -->
         <!-- Data section -->
         <table class="table table-striped">
             <thead>
@@ -27,7 +26,6 @@
                 </tr>
             </tbody>
         </table>
-        <!-- Data section -->
         <!-- Load of funds section -->
         <h2>Carga de fondos</h2>
         <div class="row">
@@ -46,7 +44,6 @@
                 </form>
             </div>
         </div>
-        <!-- Load of funds section -->
     </div>
 </template>
   

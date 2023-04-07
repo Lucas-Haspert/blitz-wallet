@@ -7,6 +7,8 @@ import ExchangesView from '../views/ExchangesView.vue'
 import AccountView from '../views/AccountView.vue'
 import SummaryView from '../views/SummaryView.vue'
 import TransactionView from '../views/TransactionView.vue'
+import CoinsView from '../views/CoinsView.vue'
+
 
 const routes = [
   // Home
@@ -72,6 +74,16 @@ const routes = [
   // Transaction
   {
     path: '/transaction', name: 'transaction', component: TransactionView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  // Coins
+  {
+    path: '/coins', name: 'coins', component: CoinsView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {

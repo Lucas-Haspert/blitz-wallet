@@ -6,9 +6,9 @@
     </div>
     <div v-else>
       <!-- Title section -->
-      <h1>Historial de transacciones</h1>
+      <h1>Monedas</h1>
       <!-- Table section -->
-      <TableRecord v-bind:items="transactions"></TableRecord>
+      <TableCoin coin="Dolár" v-bind:items="coins"></TableCoin>
     </div>
   </div>
 </template>
@@ -17,26 +17,23 @@
 import { mapState } from "vuex";
 import NavBar from '@/components/NavBar.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
-import TableRecord from '@/components/TableRecord.vue'
+import TableCoin from '@/components/TableCoin.vue'
 
 export default {
-  name: 'RecordView',
+  name: 'CoinView',
   components: {
     NavBar,
     LoadingSpinner,
-    TableRecord,
+    TableCoin,
   },
   created() {
-    // Get the username.
-    let username = this.$store.getters['account/username'];
-    
-    // Get the transactions.
-    this.$store.dispatch('transaction/getAll', username);
+    // Get the coins.
+    this.$store.dispatch('coin/getAll');
   },
   computed: {
     ...mapState({
       loadingStatus: state => state.loading.loadingStatus,
-      transactions: state => state.transaction.transactions,
+      coins: state => state.coin.coins,
     })
   },
   watch: {
