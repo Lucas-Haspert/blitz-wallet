@@ -21,6 +21,11 @@ export default {
     },
     mutations: {
         SET_TRANSACTIONS(state, transactions) {
+            // Sort the transactions by datetime (desc).
+            transactions.sort(function (a, b) {
+                return b.datetime.localeCompare(a.datetime);
+            });
+
             state.transactions = transactions;
         },
         RESET_TRANSACTIONS(state) {
