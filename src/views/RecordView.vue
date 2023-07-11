@@ -8,7 +8,7 @@
       <!-- Title section -->
       <h1>Historial de transacciones</h1>
       <!-- Table section -->
-      <TableRecord v-bind:items="transactions"></TableRecord>
+      <TableRecord v-bind:items="historicalTransactions"></TableRecord>
     </div>
   </div>
 </template>
@@ -30,13 +30,13 @@ export default {
     // Get the username.
     let username = this.$store.getters['account/username'];
     
-    // Get the transactions.
-    this.$store.dispatch('transaction/getAll', username);
+    // Get the historical transactions.
+    this.$store.dispatch('transaction/getHistoricalTransactions', username);
   },
   computed: {
     ...mapState({
       loadingStatus: state => state.loading.loadingStatus,
-      transactions: state => state.transaction.transactions,
+      historicalTransactions: state => state.transaction.historicalTransactions,
     })
   },
   watch: {

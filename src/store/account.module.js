@@ -47,7 +47,21 @@ export default {
             state.funds = null;
             state.coins = null;
         },
-        UPDATE_FUNDS(state, amount) {
+        LOAD_FUNDS(state, amount) {
+            // Update and save the funds in localStorage.
+            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) + parseFloat(amount));
+
+            // Update state.
+            state.funds = localStorage.getItem('funds');
+        },
+        UPDATE_FUNDS_BY_PURCHASE(state, amount) {
+            // Update and save the funds in localStorage.
+            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) - parseFloat(amount));
+
+            // Update state.
+            state.funds = localStorage.getItem('funds');
+        },
+        UPDATE_FUNDS_BY_SALE(state, amount) {
             // Update and save the funds in localStorage.
             localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) + parseFloat(amount));
 
@@ -63,7 +77,7 @@ export default {
             commit('LOGOUT');
         },
         loadFunds({ commit }, { amount }) {
-            commit('UPDATE_FUNDS', amount);
+            commit('LOAD_FUNDS', amount);
         },
     },
 }

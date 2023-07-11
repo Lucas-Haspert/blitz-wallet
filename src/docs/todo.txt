@@ -1,5 +1,10 @@
 1- Crear/Desarrollar página para consultar cantidad de monedas (SummaryView)
-2- Crear/Desarrollar pagina compra/venta (TransactionView)
+2- Crear/Desarrollar pagina venta (TransactionView)
 3- Mejorar HomeView
 4- Pantalla análisis de inversiones (Esto es lo último que hay que hacer junto a la unificación de estilos).
 5- Unificar los estilos de todos los componentes y páginas (paleta de colores, tamaños, margenes, etc).
+
+1-
+Para este caso se obtiene la cantidad de monedas consultando las transacciones previas.
+Obtener todas las transacciones, separarlas por monedas.
+Por cada moneda obtener la cantidad vendida y la comprada, el resultado puede ser 0 o mayor a 0, nunca menor a 0.
