@@ -8,7 +8,7 @@
       <!-- Title section -->
       <h1>Monedas</h1>
       <!-- Table section -->
-      <TableCoin coin="Dolár" v-bind:items="coins"></TableCoin>
+      <TableCoin coin="Dólar" v-bind:items="coins"></TableCoin>
     </div>
   </div>
 </template>

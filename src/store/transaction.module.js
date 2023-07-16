@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getStatusCodeInfo } from '@/common/helpers/http'
+import { getAvailableCoins } from '@/common/helpers/coin'
 
 export default {
     namespaced: true,
@@ -59,13 +60,13 @@ export default {
             commit('loading/loadingStatus', true, { root: true });
 
             // Set the apiClient.
-            const apiClient = axios.create({
+            const apiClientLab = axios.create({
                 baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
                 headers: { 'x-apikey': '60eb09146661365596af552f' }
             });
 
             // Get the historical transactions.
-            await apiClient.get("transactions", {
+            await apiClientLab.get("transactions", {
                 params: {
                     q: `{"user_id": "${username}"}`
                 }
@@ -78,9 +79,6 @@ export default {
             });
         },
         async buy({ commit }, { cryptoAmount, cryptoCode }) {
-            // Change the loadingStatus.
-            commit('loading/loadingStatus', true, { root: true });
-
             // Change the loadingStatus.
             commit('loading/loadingStatus', true, { root: true });
 
@@ -100,6 +98,14 @@ export default {
                 return "No se ingreso un número como una cantidad a comprar.";
             }
 
+            // Check the cryptoAmount.
+            if (parseFloat(cryptoAmount) === 0 || parseFloat(cryptoAmount) < 0) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso una cantidad positiva a comprar.";
+            }
+
             // Check the cryptoCode.
             if (cryptoCode === null || cryptoCode === '') {
                 // Change the loadingStatus.
@@ -108,11 +114,8 @@ export default {
                 return "No se ingreso una cripto a comprar.";
             }
 
-            // Setting variables to perform calculations.
             var amountToBuy = parseFloat(cryptoAmount);
             var cryptoToBuy = cryptoCode;
-            var availableFunds = null;
-            var purchaseCost = null;
 
             // Check if funds are available.
             if (localStorage.getItem('funds') === null || localStorage.getItem('funds') === '' || parseInt(localStorage.getItem('funds')) === 0) {
@@ -123,34 +126,31 @@ export default {
             }
 
             // Get the available funds.
-            availableFunds = parseInt(localStorage.getItem('funds'));
+            var availableFunds = parseInt(localStorage.getItem('funds'));
 
             // Set the apiClient.
-            const apiCrypto = axios.create({
+            const apiClientCY = axios.create({
                 baseURL: 'https://criptoya.com/api/' + 'argenbtc' + '/' + cryptoToBuy + '/' + 'ars' + '/' + '1',
             });
 
-            // API response.
-            var apiCryptoResponse = null;
-
             // Get the exchanges.
-            await apiCrypto.get().then(result => {
-                apiCryptoResponse = result.data;
+            var apiResponseCY = await apiClientCY.get().then(result => {
+                return result;
             }).catch(error => {
                 commit('loading/loadingStatus', false, { root: true });
                 throw new Error(`API ${error}`);
             });
 
-            // Check the apiCryptoResponse.
-            if (apiCryptoResponse === null || apiCryptoResponse['ask'] === null) {
+            // Check the apiResponseCY.
+            if (apiResponseCY.data === null || apiResponseCY.data['ask'] === null) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
                 return "No se pudo obtener el precio de la criptomoneda.";
             }
 
-            // Check if the apiCryptoResponse is a number.
-            if (isNaN(apiCryptoResponse['ask'])) {
+            // Check if the apiResponseCY is a number.
+            if (isNaN(apiResponseCY.data['ask'])) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
@@ -158,7 +158,7 @@ export default {
             }
 
             // Get the purchase cost.
-            purchaseCost = (amountToBuy * parseFloat(apiCryptoResponse['ask'])).toFixed(2);
+            var purchaseCost = (amountToBuy * parseFloat(apiResponseCY.data['ask'])).toFixed(2);
 
             // Check if the purchase can be made.
             if (purchaseCost > availableFunds) {
@@ -179,45 +179,206 @@ export default {
             };
 
             // Set the apiClient.
-            const apiTransaction = axios.create({
+            const apiClientLab = axios.create({
                 baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
                 headers: { 'x-apikey': '60eb09146661365596af552f' }
             });
-
-            // API response.
-            var apiTransactionResponse = null;
             
             // Perform the transaction.
-            await apiTransaction.post("transactions", transaction)
+            var apiResponseLab = await apiClientLab.post("transactions", transaction)
             .then((result) => {
-                apiTransactionResponse = result;
+                return result;
             }, (error) => {
                 commit('loading/loadingStatus', false, { root: true });
                 throw new Error(`API ${error}`);
             });
             
             // Process the response.
-            var statusResponse = null;
-
-            // Get the statusCodeInfo.
-            statusResponse = getStatusCodeInfo(apiTransactionResponse.status.toString().substring());
+            var statusResponse = getStatusCodeInfo(apiResponseLab.status.toString().substring());
 
             // Process the response.
-            if (apiTransactionResponse.status === 200 || apiTransactionResponse.status === 201 || apiTransactionResponse.status === 202) {
+            if (apiResponseLab.status === 200 || apiResponseLab.status === 201 || apiResponseLab.status === 202) {
                 // Update account funds.
                 commit('account/UPDATE_FUNDS_BY_PURCHASE', purchaseCost, { root: true });
-
-                // Change the loadingStatus.
-                commit('loading/loadingStatus', false, { root: true });
             } else {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
                 return "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP;
             }
+  
+            // Change the loadingStatus.
+            commit('loading/loadingStatus', false, { root: true });
             
             // Return the response message.
             return "Operación exitosa: ¡Se ha realizado la compra!";
+        },
+        async sell({ commit }, { cryptoAmount, cryptoCode }) {
+            // Change the loadingStatus.
+            commit('loading/loadingStatus', true, { root: true });
+
+            // Check the cryptoAmount.
+            if (cryptoAmount === null || cryptoAmount === '') {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso una cantidad a vender.";
+            }
+
+            // Check if the cryptoAmount is a number.
+            if (isNaN(cryptoAmount)) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso un número como una cantidad a vender.";
+            }
+
+            // Check the cryptoAmount.
+            if (parseFloat(cryptoAmount) === 0 || parseFloat(cryptoAmount) < 0) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso una cantidad positiva a vender.";
+            }
+
+            // Check the cryptoCode.
+            if (cryptoCode === null || cryptoCode === '') {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso una cripto a vender.";
+            }
+
+            // Setting variables to perform calculations.
+            var amountToSell = parseFloat(cryptoAmount);
+            var cryptoToSell = cryptoCode;
+
+            // Set the apiClient.
+            const apiClientCY = axios.create({
+                baseURL: 'https://criptoya.com/api/' + 'argenbtc' + '/' + cryptoToSell + '/' + 'ars' + '/' + '1',
+            });
+
+            // Get the exchanges.
+            var apiResponseCY = await apiClientCY.get().then(result => {
+                return result;
+            }).catch(error => {
+                commit('loading/loadingStatus', false, { root: true });
+                throw new Error(`API ${error}`);
+            });
+
+            // Check the apiResponseCY.
+            if (apiResponseCY.data === null || apiResponseCY.data['bid'] === null) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se pudo obtener el precio de la criptomoneda.";
+            }
+
+            // Check if the apiResponseCY is a number.
+            if (isNaN(apiResponseCY.data['bid'])) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "El precio de la criptomoneda no es un número.";
+            }
+
+            // Get the sale profit.
+            var saleProfit = (amountToSell * parseFloat(apiResponseCY.data['bid'])).toFixed(2);
+
+            // Set the apiClient.
+            const apiClientLab = axios.create({
+                baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
+                headers: { 'x-apikey': '60eb09146661365596af552f' }
+            });
+
+            // Get the historical transactions.
+            var apiResponseLab = await apiClientLab.get("transactions", {
+                params: {
+                    q: `{"user_id": "${localStorage.getItem('username')}"}`
+                }
+            }).then(result => {
+                return result;
+            }).catch(error => {
+                commit('loading/loadingStatus', false, { root: true });
+                throw new Error(`API ${error}`);
+            });
+
+            // Set the historicalTransactions.
+            let historicalTransactions = apiResponseLab.data;
+
+            // Get the availableCoins.
+            var availableCoins = getAvailableCoins(cryptoToSell, historicalTransactions);
+            
+            // Check the availableCoins.
+            if (!availableCoins.succesfull) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "Error: " + availableCoins.message;
+            }
+
+            // Check the availableCoins.
+            if (availableCoins.availableAmount === 0) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "Advertencia: " + "No hay un monto disponible para realizar la venta.";
+            }
+
+            // Check the availableCoins.
+            if (availableCoins.availableAmount <= 0) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "Error: " + "Monto disponible negativo.";
+            }
+
+            // Check the availableCoins.
+            if (availableCoins.availableAmount < amountToSell) {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "Error: " + "Monto insuficiente para realizar la venta.";
+            }
+
+            // Set the transaction.
+            let transaction = {
+                "user_id": localStorage.getItem('username'),
+                "action": "sale",
+                "crypto_code": cryptoToSell,
+                "crypto_amount": amountToSell,
+                "money": saleProfit,
+                "datetime": new Date().toJSON().toString().substring(0, 19).replace("T", " "),
+            };
+                        
+            // Perform the transaction.
+            apiResponseLab = await apiClientLab.post("transactions", transaction)
+            .then((result) => {
+                return result;
+            }, (error) => {
+                commit('loading/loadingStatus', false, { root: true });
+                throw new Error(`API ${error}`);
+            });
+            
+            // Process the response.
+            var statusResponse = getStatusCodeInfo(apiResponseLab.status.toString().substring());
+
+            // Process the response.
+            if (apiResponseLab.status === 200 || apiResponseLab.status === 201 || apiResponseLab.status === 202) {
+                // Update account funds.
+                commit('account/UPDATE_FUNDS_BY_SALE', saleProfit, { root: true });
+            } else {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP;
+            }
+
+            // Change the loadingStatus.
+            commit('loading/loadingStatus', false, { root: true });
+            
+            // Return the response message.
+            return "Operación exitosa: ¡Se ha realizado la venta!";
         },
         resetState({ commit }) {
             // Reset the historical transactions.
