@@ -1,25 +1,93 @@
 <template>
     <NavBar></NavBar>
     <div>
-        <h1>Resumen</h1>
+        <div v-if="loadingStatus" class="LoadingSpinner">
+            <LoadingSpinner></LoadingSpinner>
+        </div>
+        <div v-else>
+            <!-- Title section -->
+            <h1>Resumen</h1>
+            <!-- Data section -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">SALDO ACTUAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${{ funds }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <img class="logo" alt="Binance logo" src="../assets/images/binance-usd-busd-logo.svg">
+                        <p>Binance (busd)</p>
+                        <p>{{ amountCoins[0] }}</p>
+                    </div>
+                    <div class="col">
+                        <img class="logo" alt="Bitcoin logo" src="../assets/images/bitcoin-btc-logo.svg">
+                        <p>Bitcoin (btc)</p>
+                        <p>{{ amountCoins[1] }}</p>
+                    </div>
+                    <div class="col">
+                        <img class="logo" alt="BNB logo" src="../assets/images/bnb-bnb-logo.svg">
+                        <p>BNB (bnb)</p>
+                        <p>{{ amountCoins[2] }}</p>
+                    </div>
+                    <div class="col">
+                        <img class="logo" alt="Dogecoin logo" src="../assets/images/dogecoin-doge-logo.svg">
+                        <p>Dogecoin (doge)</p>
+                        <p>{{ amountCoins[3] }}</p>
+                    </div>
+                    <div class="col">
+                        <img class="logo" alt="Usd Coin logo" src="../assets/images/usd-coin-usdc-logo.svg">
+                        <p>Usd Coin (usdc)</p>
+                        <p>{{ amountCoins[4] }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-  
+
 <script>
+
 import { mapState } from "vuex";
 import NavBar from '@/components/NavBar.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 export default {
     name: 'SummaryView',
     components: {
         NavBar,
+        LoadingSpinner,
     },
+    data: () => ({
+        funds: null,
+        amountCoins: [],
+    }),
     created() {
+        //
+        this.funds = localStorage.getItem("funds");
 
+        // Get the username.
+        //let username = this.$store.getters['account/username'];
+
+        this.amountCoins = [];
+
+        this.amountCoins.push("-");
+        this.amountCoins.push("-");
+        this.amountCoins.push("-");
+        this.amountCoins.push("-");
+        this.amountCoins.push("-");
+        this.amountCoins.push("-");
     },
     computed: {
         ...mapState({
-
+            loadingStatus: state => state.loading.loadingStatus,
         })
     },
     watch: {

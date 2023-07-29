@@ -1,4 +1,6 @@
-export const getAvailableCoins = (crypto, transactions) => {
+import { actions } from '@/common/constants/constants'
+
+export const getAvailableCoinsByCrypto = (crypto, transactions) => {
     // Set the response.
     var response = {
         availableAmount: null,
@@ -28,12 +30,12 @@ export const getAvailableCoins = (crypto, transactions) => {
     transactions.forEach(function(item) {
         if (item.crypto_code === crypto) {
             // Increase purchase amount.
-            if (item.action === "purchase") {
+            if (item.action === actions.PURCHASE) {
                 purchasedAmount = purchasedAmount + item.crypto_amount;
             }
 
             // Increase quantity sold.
-            if (item.action === "sale") {
+            if (item.action === actions.SALE) {
                 quantitySold = quantitySold + item.crypto_amount;
             }
         }

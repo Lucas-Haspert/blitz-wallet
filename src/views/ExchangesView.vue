@@ -16,14 +16,11 @@
         </select>
         <select class="form-select" v-model="selectedCoin">
           <option disabled value="">Seleccione una cripto</option>
-          <option v-bind:value="'btc'">Bitcoin</option>
-          <option v-bind:value="'eth'">Ethereum</option>
-          <option v-bind:value="'usdt'">Tether</option>
-          <option v-bind:value="'usdc'">USD Coin</option>
-          <option v-bind:value="'bnb'">BNB</option>
-          <option v-bind:value="'xrp'">XRP</option>
           <option v-bind:value="'busd'">Binance USD</option>
+          <option v-bind:value="'btc'">Bitcoin</option>
+          <option v-bind:value="'bnb'">BNB</option>
           <option v-bind:value="'doge'">Dogecoin</option>
+          <option v-bind:value="'usdc'">USD Coin</option>
         </select>
       </div>
       <!-- Table section -->

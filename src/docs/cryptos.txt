@@ -1,8 +1,7 @@
-1. Bitcoin - BTC
-2. Ethereum - ETH
-3. Tether - USDT
-4. USD Coin - USDC
-5. BNB - BNB
-6. XRP - XRP
-7. Binance USD - BUSD
-8. Dogecoin - DOGE
+1. Binance USD - BUSD
+2. Bitcoin - BTC
+3. BNB - BNB
+4. Dogecoin - DOGE
+5. USD Coin - USDC
+
+

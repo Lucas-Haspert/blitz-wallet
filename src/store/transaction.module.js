@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getStatusCodeInfo } from '@/common/helpers/http'
-import { getAvailableCoins } from '@/common/helpers/coin'
+import { getAvailableCoinsByCrypto } from '@/common/helpers/coin'
+import { actions } from '@/common/constants/constants'
 
 export default {
     namespaced: true,
@@ -171,7 +172,7 @@ export default {
             // Set the transaction.
             let transaction = {
                 "user_id": localStorage.getItem('username'),
-                "action": "purchase",
+                "action": actions.PURCHASE,
                 "crypto_code": cryptoToBuy,
                 "crypto_amount": amountToBuy,
                 "money": purchaseCost,
@@ -307,7 +308,7 @@ export default {
             let historicalTransactions = apiResponseLab.data;
 
             // Get the availableCoins.
-            var availableCoins = getAvailableCoins(cryptoToSell, historicalTransactions);
+            var availableCoins = getAvailableCoinsByCrypto(cryptoToSell, historicalTransactions);
             
             // Check the availableCoins.
             if (!availableCoins.succesfull) {
@@ -344,7 +345,7 @@ export default {
             // Set the transaction.
             let transaction = {
                 "user_id": localStorage.getItem('username'),
-                "action": "sale",
+                "action": actions.SALE,
                 "crypto_code": cryptoToSell,
                 "crypto_amount": amountToSell,
                 "money": saleProfit,
