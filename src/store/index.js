@@ -3,7 +3,7 @@ import loading from './loading.module'
 import transaction from './transaction.module'
 import exchange from './exchange.module'
 import account from './account.module'
-import coin from './coin.module'
+import forex from './forex.module'
 
 export default createStore({
   state: {
@@ -23,6 +23,6 @@ export default createStore({
     transaction,
     exchange,
     account,
-    coin,
+    forex,
   }
 })

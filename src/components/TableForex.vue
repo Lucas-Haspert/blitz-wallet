@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th colspan="6">{{ coin }}</th>
+        <th colspan="6">{{ currency }}</th>
       </tr>
       <tr>
         <th scope="col">BANCO</th>
@@ -22,10 +22,10 @@
 
 <script>
 export default {
-  name: "TableCoin",
+  name: "TableForex",
   components: {},
   props: {
-    coin: String,
+    currency: String,
     items: Array,
   },
   methods: {

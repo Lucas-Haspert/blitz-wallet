@@ -6,9 +6,9 @@
     </div>
     <div v-else>
       <!-- Title section -->
-      <h1>Monedas</h1>
+      <h1>Mercado de divisas</h1>
       <!-- Table section -->
-      <TableCoin coin="Dólar" v-bind:items="coins"></TableCoin>
+      <TableForex currency="Dólar" v-bind:items="currencies"></TableForex>
     </div>
   </div>
 </template>
@@ -17,23 +17,23 @@
 import { mapState } from "vuex";
 import NavBar from '@/components/NavBar.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
-import TableCoin from '@/components/TableCoin.vue'
+import TableForex from '@/components/TableForex.vue'
 
 export default {
-  name: 'CoinView',
+  name: 'ForexView',
   components: {
     NavBar,
     LoadingSpinner,
-    TableCoin,
+    TableForex,
   },
   created() {
-    // Get the coins.
-    this.$store.dispatch('coin/getAll');
+    // Get the currencies.
+    this.$store.dispatch('forex/getAll');
   },
   computed: {
     ...mapState({
       loadingStatus: state => state.loading.loadingStatus,
-      coins: state => state.coin.coins,
+      currencies: state => state.forex.currencies,
     })
   },
   watch: {

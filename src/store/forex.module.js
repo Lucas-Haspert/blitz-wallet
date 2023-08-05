@@ -3,19 +3,19 @@ import axios from "axios";
 export default {
     namespaced: true,
     state: {
-        coins: [],
+        currencies: [],
     },
     getters: {
-        coins: state => {
-            return state.coins;
+        currencies: state => {
+            return state.currencies;
         },
     },
     mutations: {
-        SET_COINS(state, coins) {
-            state.coins = coins;
+        SET_CURRENCIES(state, currencies) {
+            state.currencies = currencies;
         },
-        RESET_COINS(state) {
-            state.coins = [];
+        RESET_CURRENCIES(state) {
+            state.currencies = [];
         },
     },
     actions: {
@@ -28,9 +28,9 @@ export default {
                 baseURL: 'https://criptoya.com/api/bancostodos',
             });
 
-            // Get the coins.
+            // Get the currencies.
             await apiClient.get().then(result => {
-                commit('SET_COINS', result.data);
+                commit('SET_CURRENCIES', result.data);
                 commit('loading/loadingStatus', false, { root: true })
             }).catch(error => {
                 commit('loading/loadingStatus', false, { root: true })
@@ -38,8 +38,8 @@ export default {
             });
         },
         resetState({ commit }) {
-            // Reset the coins.
-            commit('RESET_COINS');
+            // Reset the currencies.
+            commit('RESET_CURRENCIES');
         },
     },
 }

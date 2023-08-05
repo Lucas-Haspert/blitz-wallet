@@ -7,7 +7,7 @@ import ExchangesView from '../views/ExchangesView.vue'
 import AccountView from '../views/AccountView.vue'
 import SummaryView from '../views/SummaryView.vue'
 import TransactionView from '../views/TransactionView.vue'
-import CoinsView from '../views/CoinsView.vue'
+import ForexView from '../views/ForexView.vue'
 
 
 const routes = [
@@ -81,9 +81,9 @@ const routes = [
       }
     }
   },
-  // Coins
+  // Forex
   {
-    path: '/coins', name: 'coins', component: CoinsView,
+    path: '/forex', name: 'forex', component: ForexView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {

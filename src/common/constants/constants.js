@@ -32,18 +32,53 @@ export const cryptos = {
 }
 
 export const exchanges = {
+    /*
+    1. Binance USD - BUSD
+    2. Bitcoin - BTC
+    3. BNB - BNB
+    4. Dogecoin - DOGE
+    5. USD Coin - USDC
+    */
     ARGENBTC: {
         key: "ARGENBTC",
         title: "ArgenBTC",
-        coin: "btc, dai",
+        coin: ["btc"],
         fiat: "ars",
-        resourcepath: "/argenbtc",
+        resourcepath: "/api/argenbtc",
+    },
+    BINANCE: {
+        key: "BINANCE",
+        title: "Binance",
+        coin: ["busd", "btc", "bnb"],
+        fiat: "ars",
+        resourcepath: "/api/binance",
+    },
+    BITEX: {
+        key: "BITEX",
+        title: "Bitex",
+        coin: ["btc", "usdc"],
+        fiat: "ars",
+        resourcepath: "/api/bitex",
+    },
+    BITSO: {
+        key: "BITSO",
+        title: "Bitso",
+        coin: ["busd", "btc", "doge", "usdc"],
+        fiat: "ars",
+        resourcepath: "/api/bitso",
+    },
+    BUENBIT: {
+        key: "BUENBIT",
+        title: "Buenbit",
+        coin: ["busd", "btc", "bnb", "usdc"],
+        fiat: "ars",
+        resourcepath: "/api/buenbit",
     },
     SATOSHITANGO: {
         key: "SATOSHITANGO",
         title: "SatoshiTango",
-        coin: "btc, eth, dai, usdc, xrp, bch, ltc, ada, sol, xlm",
-        fiat: "ars, clp, mxn, pen, usd",
-        resourcepath: "/satoshitango",
+        coin: ["btc", "doge", "usdc"],
+        fiat: "ars",
+        resourcepath: "/api/satoshitango",
     },
 }
