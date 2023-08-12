@@ -4,6 +4,7 @@ import transaction from './transaction.module'
 import exchange from './exchange.module'
 import account from './account.module'
 import forex from './forex.module'
+import coin from './coin.module'
 
 export default createStore({
   state: {
@@ -24,5 +25,6 @@ export default createStore({
     exchange,
     account,
     forex,
+    coin,
   }
 })

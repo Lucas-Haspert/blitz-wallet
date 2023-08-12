@@ -21,6 +21,6 @@ export default {
 
 <style>
 .logo {
-  width: 50%;
+  width: 25%;
 }
 </style>

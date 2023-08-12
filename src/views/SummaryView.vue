@@ -54,7 +54,6 @@
 </template>
 
 <script>
-
 import { mapState } from "vuex";
 import NavBar from '@/components/NavBar.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
@@ -69,21 +68,22 @@ export default {
         funds: null,
         amountCoins: [],
     }),
-    created() {
-        //
+    async created() {
+        // Get the funds.
         this.funds = localStorage.getItem("funds");
 
-        // Get the username.
-        //let username = this.$store.getters['account/username'];
+        // Get the coins.
+        var availableCoins = await this.$store.dispatch('coin/getCoins');
 
+        // Clean the coins.
         this.amountCoins = [];
 
-        this.amountCoins.push("-");
-        this.amountCoins.push("-");
-        this.amountCoins.push("-");
-        this.amountCoins.push("-");
-        this.amountCoins.push("-");
-        this.amountCoins.push("-");
+        // Set the coins.  
+        this.amountCoins.push(availableCoins[0].amount);
+        this.amountCoins.push(availableCoins[1].amount);
+        this.amountCoins.push(availableCoins[2].amount);
+        this.amountCoins.push(availableCoins[3].amount);
+        this.amountCoins.push(availableCoins[4].amount);
     },
     computed: {
         ...mapState({
