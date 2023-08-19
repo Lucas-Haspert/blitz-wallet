@@ -26,7 +26,7 @@ export default {
         }
     },
     actions: {
-        async getAll({ commit }, { fiat, coin, volumen }) {
+        async getAll({ commit }, { fiat, coin }) {
             // Change the loadingStatus
             commit('loading/loadingStatus', true, { root: true })
 
@@ -36,7 +36,7 @@ export default {
 
             // Set the apiClient
             const apiClient = axios.create({
-                baseURL: 'https://criptoya.com/api/' + coin.toString() + '/' + fiat.toString() + '/' + volumen,
+                baseURL: 'https://criptoya.com/api/' + coin.toString() + '/' + fiat.toString() + '/' + 1,
             });
 
             // Get the exchanges

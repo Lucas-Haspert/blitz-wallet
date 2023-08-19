@@ -67,9 +67,6 @@ export default {
         ...mapState({
             username: state => state.account.username,
             funds: state => state.account.funds,
-            isDisabled: function () {
-                return this.disableBtn;
-            },
         }),
     },
     watch: {

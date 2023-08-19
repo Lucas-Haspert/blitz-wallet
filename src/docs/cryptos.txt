@@ -1,7 +1,38 @@
-1. Binance USD - BUSD
-2. Bitcoin - BTC
-3. BNB - BNB
-4. Dogecoin - DOGE
-5. USD Coin - USDC
+Criptos que se utilizan en la app:
 
+1. Bitcoin - BTC
+2. Ethereum - ETH
+3. USD Coin - USDC
+4. USD Tether - USDT
 
+Exchanges y las criptos que permite operar:
+
+Satoshitango
+coin: ( ADA , AVAX , BCH , BTC , DAI , DOGE , DOT , ETH , LINK , LTC , MANA , SOL , UNI , USDC , USDT , XLM , XRP )
+fiat: ( CLP , PEN , ARS , BRL , USD )
+vol: ( float )
+
+Ripio
+coin: ( AAVE , AVAX , AXS , BAT , BNB , BTC , CHZ , DAI , DOGE , ETH , LINK , LTC , MANA , MATIC , SLP , TRX , UNI , USDC , USDT , XLM )
+fiat: ( BRL , COP , MXN , ARS )
+vol: ( float )
+
+lemoncash
+coin: ( AAVE , ADA , ALGO , AVAX , AXS , BNB , BTC , BUSD , DAI , DOT , ETH , FTM , MANA , MATIC , PAXG , SAND , SLP , SOL , UNI , USDC , USDT )
+fiat: ( ARS , BRL )
+vol: ( float )
+
+cryptomkt
+coin: ( AAVE , ADA , ALGO , AVAX , BCH , BNB , BTC , BUSD , DAI , DOT , EOS , ETH , LINK , LTC , MATIC , PAXG , SHIB , SOL , TRX , UNI , USDC , USDT , XLM , XRP )
+fiat: ( CLP , COP , ARS , PEN , BRL )
+vol: ( float )
+
+buenbit
+coin: ( ADA , AVAX , AXS , BNB , BTC , BUSD , DAI , DOT , ETH , FTM , MANA , MATIC , NUARS , PAXG , SOL , USDC , USDT )
+fiat: ( ARS , PEN , USD )
+vol: ( float )
+
+bitso
+coin: ( AAVE , ADA , ALGO , AXS , BAT , BCH , BTC , BUSD , CHZ , DAI , DOGE , DOT , ETH , FTM , LINK , LTC , MANA , MATIC , PAXG , SAND , SHIB , SOL , TRX , UNI , USDC , USDP , USDT , XRP )
+fiat: ( COP , MXN , ARS , BRL , USD )
+vol: ( float )

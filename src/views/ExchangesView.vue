@@ -16,11 +16,10 @@
         </select>
         <select class="form-select" v-model="selectedCoin">
           <option disabled value="">Seleccione una cripto</option>
-          <option v-bind:value="'busd'">Binance USD</option>
           <option v-bind:value="'btc'">Bitcoin</option>
-          <option v-bind:value="'bnb'">BNB</option>
-          <option v-bind:value="'doge'">Dogecoin</option>
+          <option v-bind:value="'eth'">Ethereum</option>
           <option v-bind:value="'usdc'">USD Coin</option>
+          <option v-bind:value="'usdt'">USD Tether</option>
         </select>
       </div>
       <!-- Table section -->
@@ -90,7 +89,7 @@ export default {
       }
 
       // Get the exchanges.
-      this.$store.dispatch('exchange/getAll', { 'fiat': this.selectedFiat, 'coin': this.selectedCoin, 'volumen': 1 });
+      this.$store.dispatch('exchange/getAll', { 'fiat': this.selectedFiat, 'coin': this.selectedCoin });
     },
   }
 }

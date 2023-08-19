@@ -29,18 +29,21 @@
                 <div class="row">
                     <div class="mx-auto col-10 col-md-8 col-lg-6">
                         <form>
-                            <select class="form-select" v-model="exchange" disabled>
+                            <select class="form-select" v-model="exchange">
                                 <option disabled value="">Seleccione un exchange</option>
-                                <option v-bind:value="'argenbtc'">ARGENBTC</option>
-                                <option v-bind:value="'otheroption'">Otro exchange</option>
+                                <option v-bind:value="'bitso'">Bitso</option>
+                                <option v-bind:value="'buenbit'">Buenbit</option>
+                                <option v-bind:value="'cryptomkt'">CryptoMarket</option>
+                                <option v-bind:value="'lemoncash'">Lemon Cash</option>
+                                <option v-bind:value="'ripio'">Ripio</option>
+                                <option v-bind:value="'satoshitango'">SatoshiTango</option>
                             </select>
                             <select class="form-select" v-model="coin">
                                 <option disabled value="">Seleccione una cripto</option>
-                                <option v-bind:value="'busd'">Binance USD</option>
                                 <option v-bind:value="'btc'">Bitcoin</option>
-                                <option v-bind:value="'bnb'">BNB</option>
-                                <option v-bind:value="'doge'">Dogecoin</option>
+                                <option v-bind:value="'eth'">Ethereum</option>
                                 <option v-bind:value="'usdc'">USD Coin</option>
+                                <option v-bind:value="'usdt'">USD Tether</option>
                             </select>
                             <div class="form-floating">
                                 <input type="decimal" min="0" :maxlength="10" class="form-control" id="inputFunds"
@@ -48,8 +51,8 @@
                                 <label for="inputFunds">Cantidad a comprar</label>
                                 <small class="form-text text-muted">Utilice un punto para cargar valores decimales.</small>
                             </div>
-                            <button id="btnBuy" class="btn btn-lg btn-primary w-100" type="submit" @click="buy"
-                                :disabled='disableBtn'>Comprar</button>
+                            <button id="btnBuy" class="btn btn-lg btn-primary w-100" type="submit"
+                                @click="buy">Comprar</button>
                         </form>
                     </div>
                 </div>
@@ -59,18 +62,21 @@
                 <div class="row">
                     <div class="mx-auto col-10 col-md-8 col-lg-6">
                         <form>
-                            <select class="form-select" v-model="exchange" disabled>
+                            <select class="form-select" v-model="exchange">
                                 <option disabled value="">Seleccione un exchange</option>
-                                <option v-bind:value="'argenbtc'">ARGENBTC</option>
-                                <option v-bind:value="'otheroption'">Otro exchange</option>
+                                <option v-bind:value="'bitso'">Bitso</option>
+                                <option v-bind:value="'buenbit'">Buenbit</option>
+                                <option v-bind:value="'cryptomkt'">CryptoMarket</option>
+                                <option v-bind:value="'lemoncash'">Lemon Cash</option>
+                                <option v-bind:value="'ripio'">Ripio</option>
+                                <option v-bind:value="'satoshitango'">SatoshiTango</option>
                             </select>
                             <select class="form-select" v-model="coin">
                                 <option disabled value="">Seleccione una cripto</option>
-                                <option v-bind:value="'busd'">Binance USD</option>
                                 <option v-bind:value="'btc'">Bitcoin</option>
-                                <option v-bind:value="'bnb'">BNB</option>
-                                <option v-bind:value="'doge'">Dogecoin</option>
+                                <option v-bind:value="'eth'">Ethereum</option>
                                 <option v-bind:value="'usdc'">USD Coin</option>
+                                <option v-bind:value="'usdt'">USD Tether</option>
                             </select>
                             <div class="form-floating">
                                 <input type="decimal" min="0" :maxlength="10" class="form-control" id="inputFunds"
@@ -78,8 +84,8 @@
                                 <label for="inputFunds">Cantidad a vender</label>
                                 <small class="form-text text-muted">Utilice un punto para cargar valores decimales.</small>
                             </div>
-                            <button id="btnSell" class="btn btn-lg btn-primary w-100" type="submit" @click="sell"
-                                :disabled='disableBtn'>Vender</button>
+                            <button id="btnSell" class="btn btn-lg btn-primary w-100" type="submit"
+                                @click="sell">Vender</button>
                         </form>
                     </div>
                 </div>
@@ -106,8 +112,8 @@ export default {
     data: () => ({
         transactionType: true,
         exchange: '',
-        amount: '',
         coin: '',
+        amount: '',
         message: '',
     }),
     created() {
@@ -122,6 +128,27 @@ export default {
 
     },
     methods: {
+        checkEntryData() {
+            // Check the exchange.
+            if (this.exchange === null || this.exchange === '') {
+                this.message = "Seleccione un exchange.";
+                return false;
+            }
+
+            // Check the coin.
+            if (this.coin === null || this.coin === '') {
+                this.message = "Seleccione una criptomoneda.";
+                return false;
+            }
+
+            // Check the amount.
+            if (this.amount === null || this.amount === '') {
+                this.message = "Ingrese una cantidad.";
+                return false;
+            }
+
+            return true;
+        },
         switchTransaction() {
             // Clear the data.
             this.exchange = '';
@@ -132,58 +159,27 @@ export default {
             // Switch.
             if (this.$refs.switchTransaction.checked) {
                 this.transactionType = false;
-                return;
+            } else {
+                this.transactionType = true;
             }
 
-            // Switch.
-            if (!this.$refs.switchTransaction.checked) {
-                this.transactionType = true;
-                return;
-            }
+            return;
         },
         async buy() {
-            // Check the exchange.
-            //if (this.exchange === null || this.exchange === '') {
-            //    this.message = "Seleccione un exchange.";
-            //    return;
-            //}
-
-            // Check the amount.
-            if (this.amount === null || this.amount === '') {
-                this.message = "Ingrese una cantidad.";
-                return;
-            }
-
-            // Check the coin.
-            if (this.coin === null || this.coin === '') {
-                this.message = "Seleccione una criptomoneda.";
+            if (!this.checkEntryData()) {
                 return;
             }
 
             // Make the transaction.
-            this.message = await this.$store.dispatch('transaction/buy', { 'cryptoAmount': this.amount, 'cryptoCode': this.coin });
+            this.message = await this.$store.dispatch('transaction/buy', { 'cryptoAmount': this.amount, 'cryptoCode': this.coin, 'exchangeUrl': this.exchange });
         },
         async sell() {
-            // Check the exchange.
-            //if (this.exchange === null || this.exchange === '') {
-            //    this.message = "Seleccione un exchange.";
-            //    return;
-            //}
-
-            // Check the amount.
-            //if (this.amount === null || this.amount === '') {
-            //    this.message = "Ingrese una cantidad.";
-            //    return;
-            //}
-
-            // Check the coin.
-            //if (this.coin === null || this.coin === '') {
-            //    this.message = "Seleccione una criptomoneda.";
-            //    return;
-            //}
+            if (!this.checkEntryData()) {
+                return;
+            }
 
             // Make the transaction.
-            this.message = await this.$store.dispatch('transaction/sell', { 'cryptoAmount': this.amount, 'cryptoCode': this.coin });
+            this.message = await this.$store.dispatch('transaction/sell', { 'cryptoAmount': this.amount, 'cryptoCode': this.coin, 'exchangeUrl': this.exchange });
         },
     }
 }

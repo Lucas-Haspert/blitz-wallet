@@ -19,23 +19,19 @@ export const getAvailableCoins = (transactions) => {
     // Set the coins.
     var availableCoins = [
         {
-            crypto: cryptos.BINANCE_USD.code,
-            amount: 0,
-        },
-        {
             crypto: cryptos.BITCOIN.code,
             amount: 0,
         },
         {
-            crypto: cryptos.BNB.code,
-            amount: 0,
-        },
-        {
-            crypto: cryptos.DOGECOIN.code,
+            crypto: cryptos.ETHEREUM.code,
             amount: 0,
         },
         {
             crypto: cryptos.USD_COIN.code,
+            amount: 0,
+        },
+        {
+            crypto: cryptos.USD_TETHER.code,
             amount: 0,
         },
     ];

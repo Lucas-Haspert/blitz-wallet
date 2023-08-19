@@ -79,7 +79,7 @@ export default {
                 throw new Error(`API ${error}`);
             });
         },
-        async buy({ commit }, { cryptoAmount, cryptoCode }) {
+        async buy({ commit }, { cryptoAmount, cryptoCode, exchangeUrl }) {
             // Change the loadingStatus.
             commit('loading/loadingStatus', true, { root: true });
 
@@ -115,6 +115,14 @@ export default {
                 return "No se ingreso una cripto a comprar.";
             }
 
+            // Check the exchangeUrl.
+            if (exchangeUrl === null || exchangeUrl === '') {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso un exchange.";
+            }
+
             var amountToBuy = parseFloat(cryptoAmount);
             var cryptoToBuy = cryptoCode;
 
@@ -131,7 +139,7 @@ export default {
 
             // Set the apiClient.
             const apiClientCY = axios.create({
-                baseURL: 'https://criptoya.com/api/' + 'argenbtc' + '/' + cryptoToBuy + '/' + 'ars' + '/' + '1',
+                baseURL: 'https://criptoya.com/api/' + exchangeUrl + '/' + cryptoToBuy + '/' + 'ars' + '/' + '1',
             });
 
             // Get the exchanges.
@@ -214,7 +222,7 @@ export default {
             // Return the response message.
             return "Operación exitosa: ¡Se ha realizado la compra!";
         },
-        async sell({ commit }, { cryptoAmount, cryptoCode }) {
+        async sell({ commit }, { cryptoAmount, cryptoCode, exchangeUrl }) {
             // Change the loadingStatus.
             commit('loading/loadingStatus', true, { root: true });
 
@@ -250,13 +258,21 @@ export default {
                 return "No se ingreso una cripto a vender.";
             }
 
+            // Check the exchangeUrl.
+            if (exchangeUrl === null || exchangeUrl === '') {
+                // Change the loadingStatus.
+                commit('loading/loadingStatus', false, { root: true });
+
+                return "No se ingreso un exchange.";
+            }
+
             // Setting variables to perform calculations.
             var amountToSell = parseFloat(cryptoAmount);
             var cryptoToSell = cryptoCode;
 
             // Set the apiClient.
             const apiClientCY = axios.create({
-                baseURL: 'https://criptoya.com/api/' + 'argenbtc' + '/' + cryptoToSell + '/' + 'ars' + '/' + '1',
+                baseURL: 'https://criptoya.com/api/' + exchangeUrl + '/' + cryptoToSell + '/' + 'ars' + '/' + '1',
             });
 
             // Get the exchanges.

@@ -23,29 +23,24 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <img class="logo" alt="Binance logo" src="../assets/images/binance-usd-busd-logo.svg">
-                        <p>Binance (busd)</p>
+                        <img class="logo" alt="Binance logo" src="../assets/images/bitcoin-btc-logo.svg">
+                        <p>Bitcoin (btc)</p>
                         <p>{{ amountCoins[0] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="Bitcoin logo" src="../assets/images/bitcoin-btc-logo.svg">
-                        <p>Bitcoin (btc)</p>
+                        <img class="logo" alt="Bitcoin logo" src="../assets/images/ethereum-eth-logo.svg">
+                        <p>Ethereum (eth)</p>
                         <p>{{ amountCoins[1] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="BNB logo" src="../assets/images/bnb-bnb-logo.svg">
-                        <p>BNB (bnb)</p>
+                        <img class="logo" alt="BNB logo" src="../assets/images/usd-coin-usdc-logo.svg">
+                        <p>USD Coin (usdc)</p>
                         <p>{{ amountCoins[2] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="Dogecoin logo" src="../assets/images/dogecoin-doge-logo.svg">
-                        <p>Dogecoin (doge)</p>
+                        <img class="logo" alt="Dogecoin logo" src="../assets/images/tether-usdt-logo.svg">
+                        <p>USD Tether (usdt)</p>
                         <p>{{ amountCoins[3] }}</p>
-                    </div>
-                    <div class="col">
-                        <img class="logo" alt="Usd Coin logo" src="../assets/images/usd-coin-usdc-logo.svg">
-                        <p>Usd Coin (usdc)</p>
-                        <p>{{ amountCoins[4] }}</p>
                     </div>
                 </div>
             </div>
@@ -83,7 +78,6 @@ export default {
         this.amountCoins.push(availableCoins[1].amount);
         this.amountCoins.push(availableCoins[2].amount);
         this.amountCoins.push(availableCoins[3].amount);
-        this.amountCoins.push(availableCoins[4].amount);
     },
     computed: {
         ...mapState({
