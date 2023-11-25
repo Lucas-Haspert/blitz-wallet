@@ -54,6 +54,9 @@ export default {
         RESET_EXCHANGE(state) {
             state.exchange = null;
         },
+        REMOVE_TRANSACTION_FROM_HISTORY(state, transactionId) {
+            state.historicalTransactions = state.historicalTransactions.filter(transaction => transaction._id !== transactionId);
+        },
     },
     actions: {
         async getHistoricalTransactions({ commit }, username) {
@@ -78,6 +81,26 @@ export default {
                 commit('loading/loadingStatus', false, { root: true });
                 throw new Error(`API ${error}`);
             });
+        },
+        async deleteTransaction({ commit }, idTransaction) {
+            commit('loading/loadingStatus', true, { root: true });
+
+            const apiClientLab = axios.create({
+                baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
+                headers: { 'x-apikey': '60eb09146661365596af552f' }
+            });
+
+            await apiClientLab.delete(`transactions/${idTransaction}`)
+                .then((result) => {
+                    if (result.status === 200 || result.status === 201 || result.status === 202) {
+                        commit('REMOVE_TRANSACTION_FROM_HISTORY', idTransaction);
+                    }
+                }, (error) => {
+                    commit('loading/loadingStatus', false, { root: true });
+                    throw new Error(`API ${error}`);
+                });
+
+            commit('loading/loadingStatus', false, { root: true });
         },
         async buy({ commit }, { cryptoAmount, cryptoCode, exchangeUrl }) {
             // Change the loadingStatus.
@@ -176,7 +199,7 @@ export default {
 
                 return "No hay fondos suficientes para realizar la compra.";
             }
-            
+
             // Set the transaction.
             let transaction = {
                 "user_id": localStorage.getItem('username'),
@@ -192,16 +215,16 @@ export default {
                 baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
                 headers: { 'x-apikey': '60eb09146661365596af552f' }
             });
-            
+
             // Perform the transaction.
             var apiResponseLab = await apiClientLab.post("transactions", transaction)
-            .then((result) => {
-                return result;
-            }, (error) => {
-                commit('loading/loadingStatus', false, { root: true });
-                throw new Error(`API ${error}`);
-            });
-            
+                .then((result) => {
+                    return result;
+                }, (error) => {
+                    commit('loading/loadingStatus', false, { root: true });
+                    throw new Error(`API ${error}`);
+                });
+
             // Process the response.
             var statusResponse = getStatusCodeInfo(apiResponseLab.status.toString().substring());
 
@@ -215,10 +238,10 @@ export default {
 
                 return "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP;
             }
-  
+
             // Change the loadingStatus.
             commit('loading/loadingStatus', false, { root: true });
-            
+
             // Return the response message.
             return "Operación exitosa: ¡Se ha realizado la compra!";
         },
@@ -325,7 +348,7 @@ export default {
 
             // Get the availableCoins.
             var availableCoins = getAvailableCoinsByCrypto(cryptoToSell, historicalTransactions);
-            
+
             // Check the availableCoins.
             if (!availableCoins.succesfull) {
                 // Change the loadingStatus.
@@ -367,16 +390,16 @@ export default {
                 "money": saleProfit,
                 "datetime": new Date().toJSON().toString().substring(0, 19).replace("T", " "),
             };
-                        
+
             // Perform the transaction.
             apiResponseLab = await apiClientLab.post("transactions", transaction)
-            .then((result) => {
-                return result;
-            }, (error) => {
-                commit('loading/loadingStatus', false, { root: true });
-                throw new Error(`API ${error}`);
-            });
-            
+                .then((result) => {
+                    return result;
+                }, (error) => {
+                    commit('loading/loadingStatus', false, { root: true });
+                    throw new Error(`API ${error}`);
+                });
+
             // Process the response.
             var statusResponse = getStatusCodeInfo(apiResponseLab.status.toString().substring());
 
@@ -393,12 +416,11 @@ export default {
 
             // Change the loadingStatus.
             commit('loading/loadingStatus', false, { root: true });
-            
+
             // Return the response message.
             return "Operación exitosa: ¡Se ha realizado la venta!";
         },
         resetState({ commit }) {
-            // Reset the historical transactions.
             commit('RESET_HISTORICAL_TRANSACTIONS');
         },
     },
