@@ -23,22 +23,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <img class="logo" alt="Binance logo" src="../assets/images/bitcoin-btc-logo.svg">
+                        <img class="logo" alt="Binance logo" src="../assets/images/bitcoin-btc-logo.png">
                         <p>Bitcoin (btc)</p>
                         <p>{{ amountCoins[0] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="Bitcoin logo" src="../assets/images/ethereum-eth-logo.svg">
+                        <img class="logo" alt="Bitcoin logo" src="../assets/images/ethereum-eth-logo.png">
                         <p>Ethereum (eth)</p>
                         <p>{{ amountCoins[1] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="BNB logo" src="../assets/images/usd-coin-usdc-logo.svg">
+                        <img class="logo" alt="BNB logo" src="../assets/images/usd-coin-usdc-logo.png">
                         <p>USD Coin (usdc)</p>
                         <p>{{ amountCoins[2] }}</p>
                     </div>
                     <div class="col">
-                        <img class="logo" alt="Dogecoin logo" src="../assets/images/tether-usdt-logo.svg">
+                        <img class="logo" alt="Dogecoin logo" src="../assets/images/tether-usdt-logo.png">
                         <p>USD Tether (usdt)</p>
                         <p>{{ amountCoins[3] }}</p>
                     </div>

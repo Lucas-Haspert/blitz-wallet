@@ -26,7 +26,7 @@
             <td>{{ transaction.crypto_amount }}</td>
             <td>
               <button id="btnEdit" class="btn btn-lg btn-primary w-25" type="submit"
-                @click="editTransaction(transaction)">Editar</button>
+                @click="editTransaction(transaction)" :disabled="true">Editar</button>
               <button id="btnDelete" class="btn btn-lg btn-danger w-25" type="submit"
                 @click="deleteTransaction(transaction._id)">Eliminar</button>
             </td>
