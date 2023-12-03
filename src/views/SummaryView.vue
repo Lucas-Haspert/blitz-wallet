@@ -25,24 +25,35 @@
                     <div class="col">
                         <img class="logo" alt="Binance logo" src="../assets/images/bitcoin-btc-logo.png">
                         <p>Bitcoin (btc)</p>
-                        <p>{{ amountCoins[0] }}</p>
+                        <p>{{ amountCryptos[0] }}</p>
+                        <p>${{ valuedCryptos[0] }}</p>
                     </div>
                     <div class="col">
                         <img class="logo" alt="Bitcoin logo" src="../assets/images/ethereum-eth-logo.png">
                         <p>Ethereum (eth)</p>
-                        <p>{{ amountCoins[1] }}</p>
+                        <p>{{ amountCryptos[1] }}</p>
+                        <p>${{ valuedCryptos[1] }}</p>
                     </div>
                     <div class="col">
                         <img class="logo" alt="BNB logo" src="../assets/images/usd-coin-usdc-logo.png">
                         <p>USD Coin (usdc)</p>
-                        <p>{{ amountCoins[2] }}</p>
+                        <p>{{ amountCryptos[2] }}</p>
+                        <p>${{ valuedCryptos[2] }}</p>
                     </div>
                     <div class="col">
                         <img class="logo" alt="Dogecoin logo" src="../assets/images/tether-usdt-logo.png">
                         <p>USD Tether (usdt)</p>
-                        <p>{{ amountCoins[3] }}</p>
+                        <p>{{ amountCryptos[3] }}</p>
+                        <p>${{ valuedCryptos[3] }}</p>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                <p class="text-center">La valorización de las criptos son calculadas con la cotización de SatoshiTango.</p>
+            </div>
+            <!-- Messagge section -->
+            <div v-if="message !== null && message !== ''">
+                <h3>{{ message }}</h3>
             </div>
         </div>
     </div>
@@ -61,23 +72,38 @@ export default {
     },
     data: () => ({
         funds: null,
-        amountCoins: [],
+        amountCryptos: [],
+        valuedCryptos: [],
+        message: null,
     }),
     async created() {
-        // Get the funds.
         this.funds = localStorage.getItem("funds");
 
-        // Get the coins.
-        var availableCoins = await this.$store.dispatch('coin/getCoins');
+        var availableCryptos = await this.$store.dispatch('coin/getCoins');
 
-        // Clean the coins.
-        this.amountCoins = [];
+        if (!availableCryptos.status) {
+            this.message = valuedCryptos.message;
+            return;
+        }
 
-        // Set the coins.  
-        this.amountCoins.push(availableCoins[0].amount);
-        this.amountCoins.push(availableCoins[1].amount);
-        this.amountCoins.push(availableCoins[2].amount);
-        this.amountCoins.push(availableCoins[3].amount);
+        this.amountCryptos = [];
+
+        for (let i = 0; i < availableCryptos.body.length; i++) {
+            this.amountCryptos.push(availableCryptos.body[i].amount);
+        }
+
+        this.valuedCryptos = [];
+
+        for (let i = 0; i < availableCryptos.body.length; i++) {
+            var valuedCryptos = await this.$store.dispatch('coin/getCryptoValued', { 'cryptoAmount': availableCryptos.body[i].amount, 'cryptoCode': availableCryptos.body[i].crypto, 'exchangeUrl': 'satoshitango' });
+
+            if (!valuedCryptos.status) {
+                this.message = valuedCryptos.message;
+                return;
+            }
+
+            this.valuedCryptos.push(valuedCryptos.body);
+        }
     },
     computed: {
         ...mapState({

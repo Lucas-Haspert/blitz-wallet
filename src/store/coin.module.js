@@ -1,37 +1,28 @@
 import axios from "axios";
+import Response from '@/common/response';
 import { getStatusCodeInfo } from '@/common/helpers/http'
 import { getAvailableCoins } from '@/common/helpers/coin'
 
 export default {
     namespaced: true,
     state: {
-        coins: [],
+
     },
     getters: {
-        coins: state => {
-            return state.coins;
-        }
+
     },
     mutations: {
-        SET_COINS(state, coins) {
-            state.coins = coins;
-        },
-        RESET_COINS(state) {
-            state.coins = [];
-        },
+
     },
     actions: {
         async getCoins({ commit }) {
-            // Change the loadingStatus.
             commit('loading/loadingStatus', true, { root: true });
 
-            // Set the apiClient.
             const apiClientLab = axios.create({
                 baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
                 headers: { 'x-apikey': '60eb09146661365596af552f' }
             });
 
-            // Get the historical transactions.
             var apiResponseLab = await apiClientLab.get("transactions", {
                 params: {
                     q: `{"user_id": "${localStorage.getItem('username')}"}`
@@ -43,42 +34,99 @@ export default {
                 throw new Error(`API ${error}`);
             });
 
-            // Process the response.
             var statusResponse = getStatusCodeInfo(apiResponseLab.status.toString().substring());
 
-            // Process the response.
             if (statusResponse.statusCode !== 200 && statusResponse.statusCode !== 201 && statusResponse.statusCode !== 202) {
-                // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
-
-                return;
-            } 
-
-            // Set the historicalTransactions.
-            let historicalTransactions = apiResponseLab.data;
-            
-            // Get the availableCoins.
-            var availableCoins = getAvailableCoins(historicalTransactions);
-            
-            // Check the availableCoins.
-            if (!availableCoins.succesfull) {
-                // Change the loadingStatus.
-                commit('loading/loadingStatus', false, { root: true });
-
-                return;
+                const response = new Response(false, "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP, null);
+                return response;
             }
 
-            // Set the coins.
-            commit('SET_COINS', availableCoins.availableAmount);
+            let historicalTransactions = apiResponseLab.data;
+            var availableCoins = getAvailableCoins(historicalTransactions);
 
-            // Change the loadingStatus.
+            if (!availableCoins.status) {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, availableCoins.message, null);
+                return response;
+            }
+
             commit('loading/loadingStatus', false, { root: true });
-            
-            return availableCoins.availableAmount;
+            const response = new Response(true, availableCoins.message, availableCoins.body);    
+            return response;
         },
-        resetState({ commit }) {
-            // Reset the coins.
-            commit('RESET_COINS');
+        async getCryptoValued({ commit }, { cryptoAmount, cryptoCode, exchangeUrl }) {
+            commit('loading/loadingStatus', true, { root: true });
+
+            if (cryptoAmount === null || cryptoAmount === '') {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "No se ingreso una cantidad de cripto a valorizar.", null);
+                return response;
+            }
+
+            if (isNaN(cryptoAmount)) {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "No se ingreso un número como una cantidad de cripto a valorizar.", null);
+                return response;
+            }
+
+            if (parseFloat(cryptoAmount) < 0) {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "No se ingreso una cantidad positiva de cripto a valorizar.", null);
+                return response;
+            }
+
+            if (cryptoCode === null || cryptoCode === '') {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "No se ingreso el tipo de cripto a valorizar.", null);
+                return response;
+            }
+
+            if (exchangeUrl === null || exchangeUrl === '') {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "No se ingreso un exchange.", null);
+                return response;
+            }
+
+            var cryptoValued = null;
+
+            const apiClientCY = axios.create({
+                baseURL: 'https://criptoya.com/api/' + exchangeUrl + '/' + cryptoCode + '/' + 'ars' + '/' + '1',
+            });
+
+            var apiResponseCY = await apiClientCY.get().then(result => {
+                return result;
+            }).catch(error => {
+                commit('loading/loadingStatus', false, { root: true });
+                throw new Error(`API ${error}`);
+            });
+
+            var statusResponse = getStatusCodeInfo(apiResponseCY.status.toString().substring());
+
+            if (apiResponseCY.status === 200 || apiResponseCY.status === 201 || apiResponseCY.status === 202) {
+                if (apiResponseCY.data === null || apiResponseCY.data['bid'] === null) {
+                    commit('loading/loadingStatus', false, { root: true });
+                    const response = new Response(false, "No se pudo obtener el precio de la criptomoneda.", null);
+                    return response;
+                }
+
+                if (isNaN(apiResponseCY.data['bid'])) {
+                    commit('loading/loadingStatus', false, { root: true });
+                    const response = new Response(false, "El precio de la criptomoneda no es un número.", null);
+                    return response;
+                }
+
+                cryptoValued = (parseFloat(cryptoAmount) * parseFloat(apiResponseCY.data['bid'])).toFixed(2);
+            } else {
+                commit('loading/loadingStatus', false, { root: true });
+                const response = new Response(false, "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP, null);
+                return response;
+            }
+
+            commit('loading/loadingStatus', false, { root: true });
+
+            const response = new Response(true, "OK", cryptoValued);
+            return response;
         },
     },
 }

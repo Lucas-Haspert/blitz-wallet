@@ -1,22 +1,17 @@
+import Response from '@/common/response';
 import { cryptos } from '@/common/constants/constants'
 import { actions } from '@/common/constants/constants'
 
 export const getAvailableCoins = (transactions) => {
-    // Set the response.
-    var response = {
-        availableAmount: null,
-        message: null,
-        succesfull: null,
-    }
+    const response = new Response(null, null, null);
 
     if (transactions === null) {
-        response.availableAmount = null;
+        response.status = false;
         response.message = "No se ingresaron transacciones para consultar la cantidad disponible.";
-        response.succesfull = false;
+        response.body = null;
         return response;
     }
 
-    // Set the coins.
     var availableCoins = [
         {
             crypto: cryptos.BITCOIN.code,
@@ -46,7 +41,7 @@ export const getAvailableCoins = (transactions) => {
             if (item.action === actions.PURCHASE) {
                 availableCoins[i] = {
                     crypto: availableCoins[i].crypto,
-                    amount: parseFloat(availableCoins[i].amount) + parseFloat(item.crypto_amount),
+                    amount: Math.max(0, parseFloat(availableCoins[i].amount) + parseFloat(item.crypto_amount)),
                 };
             }
 
@@ -54,16 +49,16 @@ export const getAvailableCoins = (transactions) => {
             if (item.action === actions.SALE) {
                 availableCoins[i] = {
                     crypto: availableCoins[i].crypto,
-                    amount: parseFloat(availableCoins[i].amount) - parseFloat(item.crypto_amount),
+                    amount: Math.max(0, parseFloat(availableCoins[i].amount) - parseFloat(item.crypto_amount)),
                 };
             }
         }
     });
 
     // Fill the response.
-    response.availableAmount = availableCoins;
+    response.status = true;
     response.message = "Ok";
-    response.succesfull = true;
+    response.body = availableCoins;
 
     // Return the response.
     return response;
