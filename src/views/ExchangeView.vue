@@ -8,19 +8,23 @@
       <!-- Title section -->
       <h1>Exchanges</h1>
       <!-- Selects section -->
-      <div>
-        <select class="form-select" v-model="selectedFiat">
-          <option disabled value="">Seleccione una moneda</option>
-          <option v-bind:value="'ars'">Peso argentino</option>
-          <option v-bind:value="'usd'">Dólar estadounidense</option>
-        </select>
-        <select class="form-select" v-model="selectedCoin">
-          <option disabled value="">Seleccione una cripto</option>
-          <option v-bind:value="'btc'">Bitcoin</option>
-          <option v-bind:value="'eth'">Ethereum</option>
-          <option v-bind:value="'usdc'">USD Coin</option>
-          <option v-bind:value="'usdt'">USD Tether</option>
-        </select>
+      <div class="row">
+        <div class="mx-auto col-10 col-md-8 col-lg-6">
+          <form>
+            <select class="form-select" v-model="selectedFiat">
+              <option disabled value="">Seleccione una moneda</option>
+              <option v-bind:value="'ars'">Peso argentino</option>
+              <option v-bind:value="'usd'">Dólar estadounidense</option>
+            </select>
+            <select class="form-select" v-model="selectedCoin">
+              <option disabled value="">Seleccione una cripto</option>
+              <option v-bind:value="'btc'">Bitcoin</option>
+              <option v-bind:value="'eth'">Ethereum</option>
+              <option v-bind:value="'usdc'">USD Coin</option>
+              <option v-bind:value="'usdt'">USD Tether</option>
+            </select>
+          </form>
+        </div>
       </div>
       <!-- Table section -->
       <div>

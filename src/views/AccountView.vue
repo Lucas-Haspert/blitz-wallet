@@ -153,7 +153,7 @@ export default {
             }
 
             // Load the amount.
-            this.$store.dispatch('account/loadFunds', { 'amount': this.amount.toFixed(2) });
+            this.$store.dispatch('account/loadFunds', { 'amount': this.amount });
 
             // Clear the amount.
             this.amount = null;

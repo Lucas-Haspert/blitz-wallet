@@ -19,7 +19,7 @@ export default {
 }
 #th,td {
   padding: 12px;
-  text-align: center; /* Alineación horizontal centrada */
-  vertical-align: middle; /* Alineación vertical centrada */
+  text-align: center;
+  vertical-align: middle;
 }
 </style>
