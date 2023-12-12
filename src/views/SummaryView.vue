@@ -79,7 +79,7 @@ export default {
     async created() {
         this.funds = localStorage.getItem("funds");
 
-        var availableCryptos = await this.$store.dispatch('coin/getCoins');
+        var availableCryptos = await this.$store.dispatch('coin/getCryptos');
 
         if (!availableCryptos.status) {
             this.message = valuedCryptos.message;

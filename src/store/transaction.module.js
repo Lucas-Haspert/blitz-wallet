@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getStatusCodeInfo } from '@/common/helpers/http'
-import { getAvailableCoinsByCrypto } from '@/common/helpers/coin'
+import { getAvailableCoinsByCrypto } from '@/common/helpers/crypto'
 import { actions } from '@/common/constants/constants'
 
 export default {

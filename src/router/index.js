@@ -8,10 +8,9 @@ import AccountView from '../views/AccountView.vue'
 import SummaryView from '../views/SummaryView.vue'
 import TransactionView from '../views/TransactionView.vue'
 import ForexView from '../views/ForexView.vue'
-
+import InvestmentsView from '../views/InvestmentsView.vue'
 
 const routes = [
-  // Home
   {
     path: '/', name: 'home', component: HomeView,
     beforeEnter: () => {
@@ -21,7 +20,6 @@ const routes = [
       }
     }
   },
-  // Login
   {
     path: '/login', name: 'login', component: LoginView,
     beforeEnter: () => {
@@ -31,7 +29,6 @@ const routes = [
       }
     }
   },
-  // Record
   {
     path: '/record', name: 'record', component: RecordView,
     beforeEnter: () => {
@@ -41,7 +38,6 @@ const routes = [
       }
     }
   },
-  // Exchanges
   {
     path: '/exchanges', name: 'exchanges', component: ExchangesView,
     beforeEnter: () => {
@@ -51,7 +47,6 @@ const routes = [
       }
     }
   },
-  // Account
   {
     path: '/account', name: 'account', component: AccountView,
     beforeEnter: () => {
@@ -61,7 +56,6 @@ const routes = [
       }
     }
   },
-  // Summary
   {
     path: '/summary', name: 'summary', component: SummaryView,
     beforeEnter: () => {
@@ -71,7 +65,6 @@ const routes = [
       }
     }
   },
-  // Transaction
   {
     path: '/transaction', name: 'transaction', component: TransactionView,
     beforeEnter: () => {
@@ -81,9 +74,17 @@ const routes = [
       }
     }
   },
-  // Forex
   {
     path: '/forex', name: 'forex', component: ForexView,
+    beforeEnter: () => {
+      // Redirect to login if the user is not logged.
+      if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {
+        return { name: 'login' }
+      }
+    }
+  },
+  {
+    path: '/investments', name: 'investments', component: InvestmentsView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {

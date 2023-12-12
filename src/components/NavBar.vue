@@ -7,8 +7,9 @@
       <li><router-link to="/forex">Divisas</router-link></li>
       <li><router-link to="/record">Historial</router-link></li>
       <li><router-link to="/summary">Resumen</router-link></li>
+      <li><router-link to="/investments">Inversiones</router-link></li>
       <li><router-link to="/account">Cuenta</router-link></li>
-
+      
       <li style="float:right"><router-link to="/login" v-on:click.prevent="logout">Cerrar sesión</router-link></li>
     </ul>
   </nav>

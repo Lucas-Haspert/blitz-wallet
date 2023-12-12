@@ -1,7 +1,7 @@
 import axios from "axios";
 import Response from '@/common/response';
 import { getStatusCodeInfo } from '@/common/helpers/http'
-import { getAvailableCoins } from '@/common/helpers/coin'
+import { getAvailableCryptos } from '@/common/helpers/crypto'
 
 export default {
     namespaced: true,
@@ -15,7 +15,7 @@ export default {
 
     },
     actions: {
-        async getCoins({ commit }) {
+        async getCryptos({ commit }) {
             commit('loading/loadingStatus', true, { root: true });
 
             const apiClientLab = axios.create({
@@ -42,8 +42,8 @@ export default {
                 return response;
             }
 
-            let historicalTransactions = apiResponseLab.data;
-            var availableCoins = getAvailableCoins(historicalTransactions);
+            let historicalTransactions = apiResponseLab.data; // TODO: Acá podria estar vacío la data, deberia devolver un response, quizás con estado falso diciendo que no hay datos, o quizás con estado verdadero, para que no pase error
+            var availableCoins = getAvailableCryptos(historicalTransactions);
 
             if (!availableCoins.status) {
                 commit('loading/loadingStatus', false, { root: true });
