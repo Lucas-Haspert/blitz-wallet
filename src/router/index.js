@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RecordView from '../views/RecordView.vue'
-import ExchangesView from '../views/ExchangesView.vue'
+import ExchangeView from '../views/ExchangeView.vue'
 import AccountView from '../views/AccountView.vue'
 import SummaryView from '../views/SummaryView.vue'
 import TransactionView from '../views/TransactionView.vue'
@@ -39,7 +39,7 @@ const routes = [
     }
   },
   {
-    path: '/exchanges', name: 'exchanges', component: ExchangesView,
+    path: '/exchange', name: 'exchange', component: ExchangeView,
     beforeEnter: () => {
       // Redirect to login if the user is not logged.
       if (localStorage.getItem('logged') === null || !localStorage.getItem('logged')) {

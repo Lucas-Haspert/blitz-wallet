@@ -174,7 +174,7 @@ export default {
             });
 
             // Check the apiResponseCY.
-            if (apiResponseCY.data === null || apiResponseCY.data['ask'] === null) {
+            if (apiResponseCY.data === null || apiResponseCY.data['totalAsk'] === null) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
@@ -182,7 +182,7 @@ export default {
             }
 
             // Check if the apiResponseCY is a number.
-            if (isNaN(apiResponseCY.data['ask'])) {
+            if (isNaN(apiResponseCY.data['totalAsk'])) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
@@ -190,7 +190,7 @@ export default {
             }
 
             // Get the purchase cost.
-            var purchaseCost = (amountToBuy * parseFloat(apiResponseCY.data['ask'])).toFixed(2);
+            var purchaseCost = (amountToBuy * parseFloat(apiResponseCY.data['totalAsk'])).toFixed(2);
 
             // Check if the purchase can be made.
             if (purchaseCost > availableFunds) {
@@ -307,7 +307,7 @@ export default {
             });
 
             // Check the apiResponseCY.
-            if (apiResponseCY.data === null || apiResponseCY.data['bid'] === null) {
+            if (apiResponseCY.data === null || apiResponseCY.data['totalBid'] === null) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
@@ -315,7 +315,7 @@ export default {
             }
 
             // Check if the apiResponseCY is a number.
-            if (isNaN(apiResponseCY.data['bid'])) {
+            if (isNaN(apiResponseCY.data['totalBid'])) {
                 // Change the loadingStatus.
                 commit('loading/loadingStatus', false, { root: true });
 
@@ -323,7 +323,7 @@ export default {
             }
 
             // Get the sale profit.
-            var saleProfit = (amountToSell * parseFloat(apiResponseCY.data['bid'])).toFixed(2);
+            var saleProfit = (amountToSell * parseFloat(apiResponseCY.data['totalBid'])).toFixed(2);
 
             // Set the apiClient.
             const apiClientLab = axios.create({

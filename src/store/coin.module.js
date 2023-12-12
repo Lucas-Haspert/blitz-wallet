@@ -104,19 +104,19 @@ export default {
             var statusResponse = getStatusCodeInfo(apiResponseCY.status.toString().substring());
 
             if (apiResponseCY.status === 200 || apiResponseCY.status === 201 || apiResponseCY.status === 202) {
-                if (apiResponseCY.data === null || apiResponseCY.data['bid'] === null) {
+                if (apiResponseCY.data === null || apiResponseCY.data['totalBid'] === null) {
                     commit('loading/loadingStatus', false, { root: true });
                     const response = new Response(false, "No se pudo obtener el precio de la criptomoneda.", null);
                     return response;
                 }
 
-                if (isNaN(apiResponseCY.data['bid'])) {
+                if (isNaN(apiResponseCY.data['totalBid'])) {
                     commit('loading/loadingStatus', false, { root: true });
                     const response = new Response(false, "El precio de la criptomoneda no es un número.", null);
                     return response;
                 }
 
-                cryptoValued = (parseFloat(cryptoAmount) * parseFloat(apiResponseCY.data['bid'])).toFixed(2);
+                cryptoValued = (parseFloat(cryptoAmount) * parseFloat(apiResponseCY.data['totalBid'])).toFixed(2);
             } else {
                 commit('loading/loadingStatus', false, { root: true });
                 const response = new Response(false, "Error: " + "[" + statusResponse.statusCode + " " + statusResponse.statusText + "]" + " " + statusResponse.descriptionESP, null);

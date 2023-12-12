@@ -27,19 +27,12 @@ export default {
     },
     actions: {
         async getAll({ commit }, { fiat, coin }) {
-            // Change the loadingStatus
             commit('loading/loadingStatus', true, { root: true })
 
-            // "coin":{str} Cripto a operar.
-            // "fiat":{str} Moneda contra la que se opera, puede ser fiat o stablecoin.
-            // "volumen":{float} Volumen a operar, utilizar el punto como separador decimal.
-
-            // Set the apiClient
             const apiClient = axios.create({
                 baseURL: 'https://criptoya.com/api/' + coin.toString() + '/' + fiat.toString() + '/' + 1,
             });
 
-            // Get the exchanges
             await apiClient.get().then(result => {
                 commit('SET_EXCHANGES', result.data);
                 commit('loading/loadingStatus', false, { root: true })
@@ -49,7 +42,6 @@ export default {
             });
         },
         resetState({ commit }) {
-            // Reset the exchanges
             commit('RESET_EXCHANGES');
         },
     },

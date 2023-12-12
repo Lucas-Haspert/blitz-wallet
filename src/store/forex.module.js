@@ -20,15 +20,12 @@ export default {
     },
     actions: {
         async getAll({ commit }) {
-            // Change the loadingStatus.
             commit('loading/loadingStatus', true, { root: true })
 
-            // Set the apiClient.
             const apiClient = axios.create({
                 baseURL: 'https://criptoya.com/api/bancostodos',
             });
 
-            // Get the currencies.
             await apiClient.get().then(result => {
                 commit('SET_CURRENCIES', result.data);
                 commit('loading/loadingStatus', false, { root: true })
@@ -38,7 +35,6 @@ export default {
             });
         },
         resetState({ commit }) {
-            // Reset the currencies.
             commit('RESET_CURRENCIES');
         },
     },

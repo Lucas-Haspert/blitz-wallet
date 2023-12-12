@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th scope="col">EXCHANGE</th>
-        <th scope="col">COMPRAR</th>
+        <th scope="col">COMPRA</th>
         <th scope="col">COMPRA TOTAL</th>
-        <th scope="col">VENDER</th>
+        <th scope="col">VENTA</th>
         <th scope="col">VENTA TOTAL</th>
       </tr>
     </thead>

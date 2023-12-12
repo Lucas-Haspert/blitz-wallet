@@ -55,21 +55,21 @@ export default {
         },
         LOAD_FUNDS(state, amount) {
             // Update and save the funds in localStorage.
-            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) + parseFloat(amount));
+            localStorage.setItem('funds', (parseFloat(localStorage.getItem('funds')) + parseFloat(amount)).toFixed(2));
 
             // Update state.
             state.funds = localStorage.getItem('funds');
         },
         UPDATE_FUNDS_BY_PURCHASE(state, amount) {
             // Update and save the funds in localStorage.
-            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) - parseFloat(amount));
+            localStorage.setItem('funds', (parseFloat(localStorage.getItem('funds')) - parseFloat(amount)).toFixed(2));
 
             // Update state.
             state.funds = localStorage.getItem('funds');
         },
         UPDATE_FUNDS_BY_SALE(state, amount) {
             // Update and save the funds in localStorage.
-            localStorage.setItem('funds', parseFloat(localStorage.getItem('funds')) + parseFloat(amount));
+            localStorage.setItem('funds', (parseFloat(localStorage.getItem('funds')) + parseFloat(amount)).toFixed(2));
 
             // Update state.
             state.funds = localStorage.getItem('funds');
@@ -129,13 +129,13 @@ export default {
                 throw new Error(`API ${error}`);
             });
 
-            if (apiResponseCY.data === null || apiResponseCY.data['bid'] === null) {
+            if (apiResponseCY.data === null || apiResponseCY.data['totalBid'] === null) {
                 commit('loading/loadingStatus', false, { root: true });
                 const response = new Response(false, "No se pudo obtener el precio de venta de la criptomoneda.", null);
                 return response;
             }
 
-            if (isNaN(apiResponseCY.data['bid'])) {
+            if (isNaN(apiResponseCY.data['totalBid'])) {
                 commit('loading/loadingStatus', false, { root: true });
                 const response = new Response(false, "El precio de venta de la criptomoneda no es un número.", null);
                 return response;
@@ -145,7 +145,7 @@ export default {
             // Balance = (Cantidad de criptomonedas vendidas × Valor actual) − (Cantidad de criptomonedas compradas × Valor al momento de la compra)
             // Balance = (Cantidad de criptomonedas vendidas × Valor actual) − (Monto)
 
-            var saleValue = (parseFloat(apiResponseCY.data['bid'])).toFixed(2);
+            var saleValue = (parseFloat(apiResponseCY.data['totalBid'])).toFixed(2);
             var soldCryptos = getSoldCryptos(apiResponseLab.data);
             var totalPurchaseAmount = getTotalPurchaseAmount(apiResponseLab.data, cryptoCode);
 

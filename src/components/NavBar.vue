@@ -3,7 +3,7 @@
     <ul>
       <li><router-link to="/">Inicio</router-link></li>
       <li><router-link to="/transaction">Comprar-Vender</router-link></li>
-      <li><router-link to="/exchanges">Exchanges</router-link></li>
+      <li><router-link to="/exchange">Exchange</router-link></li>
       <li><router-link to="/forex">Divisas</router-link></li>
       <li><router-link to="/record">Historial</router-link></li>
       <li><router-link to="/summary">Resumen</router-link></li>

@@ -8,7 +8,25 @@
       <!-- Title section -->
       <h1>Mercado de divisas</h1>
       <!-- Table section -->
-      <TableForex currency="Dólar" v-bind:items="currencies"></TableForex>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th colspan="6">Dólar estadounidense</th>
+          </tr>
+          <tr>
+            <th scope="col">BANCO</th>
+            <th scope="col">COMPRA</th>
+            <th scope="col">VENTA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in currencies" v-bind:key="index">
+            <td>{{ index.toString().toUpperCase() }}</td>
+            <td>${{ item.ask }}</td>
+            <td>${{ item.bid }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -17,17 +35,14 @@
 import { mapState } from "vuex";
 import NavBar from '@/components/NavBar.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
-import TableForex from '@/components/TableForex.vue'
 
 export default {
   name: 'ForexView',
   components: {
     NavBar,
     LoadingSpinner,
-    TableForex,
   },
   created() {
-    // Get the currencies.
     this.$store.dispatch('forex/getAll');
   },
   computed: {

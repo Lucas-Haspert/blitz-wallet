@@ -42,7 +42,7 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import TableExchange from '@/components/TableExchange.vue'
 
 export default {
-  name: 'ExchangesView',
+  name: 'ExchangeView',
   components: {
     NavBar,
     LoadingSpinner,
