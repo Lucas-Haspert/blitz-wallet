@@ -71,7 +71,6 @@ export default {
     },
     watch: {
         amount: {
-            // Button enabled and disabled.
             handler: function () {
                 if (this.amount === null || this.amount === '') {
                     return this.disableBtn = true;
@@ -88,12 +87,10 @@ export default {
     },
     methods: {
         loadFunds() {
-            // Check if the amount is null or is empty.
             if (this.amount === null || this.amount === '') {
                 return;
             }
 
-            // Check if the amount has a character other than 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 or '.'.
             for (var i = 0; i < this.amount.length; i++) {
                 if (this.amount.charAt(i) === '0') {
                     continue;
@@ -142,23 +139,17 @@ export default {
                 return;
             }
 
-            // Check if the amount is more than 0.
             if (this.amount <= 0) {
                 return;
             }
 
-            // Check if the amount is more than 100000000.
             if (this.amount > 100000000) {
                 return;
             }
 
-            // Load the amount.
             this.$store.dispatch('account/loadFunds', { 'amount': this.amount });
-
-            // Clear the amount.
             this.amount = null;
 
-            // Clear the input.
             document.getElementById('inputFunds').value = '';
         },
     }

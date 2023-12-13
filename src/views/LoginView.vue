@@ -41,7 +41,6 @@ export default {
   },
   watch: {
     username: {
-      // Button enabled and disabled.
       handler: function () {
         if (this.username !== null && this.username.trim() !== '' && this.username.trim().length >= 4 && this.username.trim().length <= 20) {
           return this.disableBtn = false;
@@ -54,29 +53,21 @@ export default {
   },
   methods: {
     doLogin() {
-      // Check if the username entered is empty.
       if (this.username === null || this.username.length === "") {
         return alert('Debe ingresar un username.');
       }
 
-      // Check if the entered username has 4 or more characters.
       if (this.username.length < 4) {
         return alert('El username debe tener al menos 4 caracteres.');
       }
 
-      // Check if the entered username has 20 or less characters.
       if (this.username.length > 20) {
         return alert('El username debe tener menos de 20 caracteres.');
       }
 
-      // This expression only accepts alphanumeric values and limits the number of characters entered from 4 to 20 characters.
       if (/^[a-zA-Z0-9]{4,20}$/.test(this.username)) {
-        // Login.
         this.$store.dispatch('account/login', { 'username': this.username });
-
-        // Redirect to home.
         router.push({ path: '/' })
-
       } else {
         return alert('Solo se permiten caracteres alfanuméricos.');
       }
